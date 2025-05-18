@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seats', function (Blueprint $table) {
+        Schema::create('cinema_seats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('showtime_id')->constrained()->onDelete('cascade'); //Foreign key to showtimes
             $table->string('seat_number'); //Example: A1, B5, etc.
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seats');
+        Schema::dropIfExists('cinema_seats');
     }
 };
