@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,31 @@
     @stack('styles')
 </head>
 <body>
-    @yield('body')
+
+    <header>
+        @auth
+            @if (Auth::user()->role === 'admin')
+                @include('layouts.admin')
+            @elseif (Auth::user()->role === 'customer')
+                @include('layouts.customer')
+            @else
+                @include('layouts.guest')
+            @endif
+        @else
+            @include('layouts.guest')
+        @endauth
+    </header>
+
+
+
+    <main class="content">
+        @yield('content')
+    </main>
+
+    <footer>
+        <p>&copy; {{ date('Y') }} My Cinema</p>
+    </footer>
+
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
 </body>
