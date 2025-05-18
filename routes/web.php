@@ -51,6 +51,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/movies', MovieController::class);
     Route::resource('/showtimes', ShowtimeController::class);
+    Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
     Route::resource('/seats', SeatController::class)->only(['index', 'update']);
     Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
 });
