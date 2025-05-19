@@ -51,7 +51,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/movies', MovieController::class);
     Route::resource('/showtimes', ShowtimeController::class);
-    Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
     Route::resource('/seats', SeatController::class)->only(['index', 'update']);
+    Route::get('/seats/create', [SeatController::class, 'create'])->name('seat.create');
+    Route::post('/seats/store', [SeatController::class, 'store'])->name('seat.store');    
+    Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
+    Route::post('/seats/edit', [SeatController::class, 'storeedit'])->name('seat.storeedit');
+    Route::delete('/seats/{seat}', [SeatController::class, 'delete'])->name('seat.delete');
     Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
 });
