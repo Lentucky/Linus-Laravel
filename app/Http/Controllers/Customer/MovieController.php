@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Movies;
+use App\Models\Movie;
 
 class MovieController extends Controller
 {
-   /* public function index(Request $request)
+   public function index(Request $request)
     {
         //Optional: search and filter
         $query = Movie::query();
@@ -25,10 +25,6 @@ class MovieController extends Controller
 
         return view('customer.movies', compact('movies'));
     }
-        */
-
-        public function insdex(){
-            $movies = Movies::all();
-            return view('admin.movies.index',[ 'movies' => $movies]);
-        }   
+        
+  
 }
