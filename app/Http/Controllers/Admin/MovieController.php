@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Genre;
@@ -38,7 +39,7 @@ class MovieController extends Controller
                 $image->move($uploadPath, $imageName);
 
                 // Save the file path or filename to DB
-                $validated['poster_url'] = $imageName;
+                $validated['poster_url'] = 'uploads/' . $imageName;
             }     
 
         Movie::create($validated);
@@ -75,11 +76,11 @@ class MovieController extends Controller
             if (!file_exists($uploadPath)) {
                 mkdir($uploadPath, 0755, true);
             }
-
+            
             $image = $request->file('poster_url');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move($uploadPath, $imageName);
-            $validated['poster_url'] = $imageName;
+            $validated['poster_url'] = 'uploads/' . $imageName;
         }
 
         $movie->update($validated);
@@ -87,6 +88,11 @@ class MovieController extends Controller
         return redirect()->route('movies.index')->with('success', 'Movie updated successfully!');
     }
     public function delete(Movie $movie){
+        //dd($uploadPath, $movie->poster_url);
+        if ($movie->poster_url && file_exists(public_path($movie->poster_url))) {
+            unlink(public_path($movie->poster_url));
+
+        }        
         $movie->delete();
 
         return redirect()->route('movies.index')->with('success',  "Movie succesfully deleted");
