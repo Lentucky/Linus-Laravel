@@ -9,11 +9,11 @@ use App\Models\Showtime;
 class SeatController extends Controller
 {
     public function index(){
-        $seats = Seat::all();
+        $seats = Seat::with('showtime')->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.seats.index',[ 'seats' => $seats]);
     }
     public function create(){
-        $showtimes = Showtime::all();
+        $showtimes = Showtime::with('movie')->get();
         //$takenseats = Seat::where('is_booked', 0)->get();
         //dd($takenseats->all());
         return view('admin.seats.create',['showtimes' => $showtimes]);
@@ -65,5 +65,16 @@ class SeatController extends Controller
         $seat->delete();
 
         return redirect()->route('seats.index')->with('success',  "Seat succesfully deleted");
-    }    
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+
+        $seats = Seat::when(is_numeric($query), function ($q) use ($query) {
+            $q->where('seat_number', $query)->Orwhere('showtime_id', $query); 
+        })->paginate(10);
+
+        return view('admin.seats.index', compact('seats', 'query'));
+    }  
 }

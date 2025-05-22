@@ -7,10 +7,10 @@
     <form action="{{ route('seat.store') }}" method="POST">
         @csrf
 
-        <label for="showtime_id">Showtime_id:</label><br>
+        <label for="showtime_id">Showtime Date, Movie Name:</label><br>
         <select type="text" name="showtime_id"  required>
 			@foreach($showtimes as $showtime)
-				<option value="{{ $showtime->id }}">{{ $showtime->id }}</option>
+				<option value="{{ $showtime->id }}">ID: {{ $showtime->id }} Movie Title: {{$showtime->movie->title ?? 'No Title'}} Screening Date: {{$showtime->screening_date}} Start Time: {{$showtime->start_time}}</option>
 			@endforeach
 		</select><br>
         <label for="seat_number">Seat Number:</label><br>
