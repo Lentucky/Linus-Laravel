@@ -8,7 +8,7 @@ use App\Models\Movie;
 
 class MovieController extends Controller
 {
-    public function index(Request $request)
+   public function index(Request $request)
     {
         //Optional: search and filter
         $query = Movie::query();
@@ -25,4 +25,6 @@ class MovieController extends Controller
 
         return view('customer.movies', compact('movies'));
     }
+        
+  
 }
