@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Movie;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Showtime>
  */
@@ -17,7 +17,7 @@ class ShowtimeFactory extends Factory
     public function definition(): array
     {
         return [
-            'movie_id' => fake()->unique()->numberBetween(1,100),
+            'movie_id' => Movie::inRandomOrder()->first()->id,
             'screening_date' => fake()->date($format = 'Y-m-d', $max = 'now'),
             'start_time' => fake()->time($format = 'H:i:s', $max = 'now')
         ];

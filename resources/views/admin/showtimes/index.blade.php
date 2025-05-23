@@ -9,26 +9,34 @@
     </form>
     <h1>Show Showtime here</h1>
     <a href=""><button>Create Showtime</button></a>
-    @foreach($seats as $seat)
-    <ul>
-        <li>ID:{{$seat->id }} Showtime ID: {{ $seat->showtime_id }} Seat Number: {{$seat->seat_number}} Booked: {{$seat->is_booked}}<a href="{{ route('seat.edit', $seat->id) }}">       <button>Edit</button></a></li>
-    </ul>
-
-
-    @endforeach
-    {{  }}
- 
-    <!-- Another format of admin panel seats -->
-    <h1>Another format NOT BUTTON is a booked</h1> 
-    <div style="display: flex; flex-wrap: wrap;">
-        @foreach($seats as $seat)
-        <div style="margin: 10px; line-height: 75px;">@if($seat->is_booked == false)Seat Number: <a href="{{ route('seat.edit', $seat->id) }}"><button>{{$seat->seat_number}}</button></a>
-        @else
-        Seat Number: <a href="">{{}}</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Genre</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Poster</th>
         
-        @endif
-        </div>
-        @endforeach
-  
-    </div>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($showtimes as $showtime)
+                <tr>
+                    <td>{{$showtime->id}}</td>
+                    <td>{{$showtime->movie->title ?? 'No Movie'}}</td>
+                    <td>{{$showtime->screening_time}}</td>
+                    <td>{{$showtime->description}}</td>
+                    <td>{{$showtime->duration}}</td>
+                    
+                    <td><a href="{{ route('showtimes.edit', $showtime->id) }}"> <button>Edit</button></a></td>
+                </tr>
+            @endforeach
+        </tbody>
+
+
+        
+    </table>
 @endsection
