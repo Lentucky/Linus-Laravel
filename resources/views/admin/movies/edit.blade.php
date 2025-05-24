@@ -26,7 +26,11 @@
         <input type="hidden" name="duration" id="duration_hidden">
         <label for="poster">Poster:</label><br>
             <div>
-                <img id="preview" src="{{ asset('uploads/' . basename($movie->poster_url)) }}" alt="Image Preview" style="max-height: 200px;" />
+                @if($movie->poster_url)
+                    <img id="preview" src="{{ asset('uploads/' . basename($movie->poster_url)) }}" alt="Image Preview" style="max-height: 200px;" />
+                @else
+                    <img id="preview" src="{{ asset('storage/images/noimage.jpg') }}" alt="Image Preview" style="max-height: 200px;" />
+                @endif
             </div>                    
            <label for="poster_url">Choose an Image:</label>
            <input type="file" name="poster_url" id="poster_url"   onchange="previewImage(event)">

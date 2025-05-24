@@ -13,13 +13,9 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Genre</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Duration</th>
-                <th>Poster</th>
-        
-                
+                <th>Movie Title</th>
+                <th>Screening Time</th>
+                <th>Start Time</th>              
             </tr>
         </thead>
         <tbody>
@@ -28,8 +24,7 @@
                     <td>{{$showtime->id}}</td>
                     <td>{{$showtime->movie->title ?? 'No Movie'}}</td>
                     <td>{{$showtime->screening_time}}</td>
-                    <td>{{$showtime->description}}</td>
-                    <td>{{$showtime->duration}}</td>
+                    <td>{{$showtime->formatted_start_time}}</td>
                     
                     <td><a href="{{ route('showtimes.edit', $showtime->id) }}"> <button>Edit</button></a></td>
                 </tr>

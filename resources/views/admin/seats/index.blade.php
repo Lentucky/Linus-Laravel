@@ -9,15 +9,47 @@
     </form>
     <h1>Show seats here</h1>
     <a href="{{ route('seat.create') }}"><button>Create Seats</button></a>
-    @foreach($seats as $seat)
-    <ul>
-        <li>ID:{{$seat->id }} Showtime Start Time: {{ $seat->showtime->start_time }} Seat Number: {{$seat->seat_number}} Booked: @if($seat->is_booked) &#9989; @else &#10060; @endif<a href="{{ route('seat.edit', $seat->id) }}">       <button>Edit</button></a></li>
-    </ul>
 
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Showtime Start Time</th>
+                <th>Seat Number</th>
+                <th>Booked Status</th> <!-- check means booked -->
+        
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($seats as $seat)
+                <tr>
+                    <td>{{$seat->id}}</td>
+                    <td style="text-align: center;">{{$seat->showtime->start_time ?? 'No Showtime'}}</td>
+                    <td><img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+                    <div style="
+                        position: relative;
+                        text-align: center;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -500%);
+                        color: white;
+                        font-size: 24px;
+                        font-weight: bold;
+                        text-shadow: 2px 2px 5px black;
+                    ">
+                    {{ $seat->seat_number }}
+                    </div></img></td>
+                    <td style="text-align: center;">@if($seat->is_booked) &#9989; @else &#10060; @endif</td>
 
-    @endforeach
-    {{ $seats->withQueryString()->links(); }}
- 
+                    <td><a href="{{ route('seat.edit', $seat->id) }}"> <button>Edit</button></a></td>
+                </tr>
+            @endforeach
+        </tbody>
+
+        
+    </table>    
+    {{ $seats->withQueryString()->links() }}
     <!-- Another format of admin panel seats -->
     <h1>Another format NOT BUTTON is a booked</h1> 
     <div style="display: flex; flex-wrap: wrap;">

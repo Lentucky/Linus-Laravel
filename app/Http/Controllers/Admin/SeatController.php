@@ -50,7 +50,7 @@ class SeatController extends Controller
         $validated = $request->validate([
             'id' => 'required|exists:seats,id',
             'showtime_id' => 'required|exists:showtimes,id',
-            'seat_number'=> 'required|integer',
+            'seat_number'=> 'required|string',  //changed to string to accomdate A1,B5,C6.
             'is_booked' => 'required|boolean'
 
         ]);
@@ -71,10 +71,12 @@ class SeatController extends Controller
     {
         $query = $request->input('search');
 
-        $seats = Seat::when(is_numeric($query), function ($q) use ($query) {
-            $q->where('seat_number', $query)->Orwhere('showtime_id', $query); 
+        $seats = Seat::with('showtime')->when($query, function ($q) use ($query) {
+            $q->where('seat_number', 'LIKE', "%{$query}%")->orWhereHas('showtime', function ($q) use ($query) {
+        $q->where('start_time', 'LIKE', "%{$query}%");
+    });
         })->paginate(10);
-
+        //dd($seats->all());
         return view('admin.seats.index', compact('seats', 'query'));
     }  
 }
