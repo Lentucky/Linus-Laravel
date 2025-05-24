@@ -55,7 +55,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     //Route::get('/movies/edit/{id}', [MovieController::class, 'edit'])->name('movies.edit');
     Route::put('/movies/{id}/edit', [MovieController::class, 'storeedit'])->name('movies.storeedit');
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
-    Route::resource('/showtimes', ShowtimeController::class);
+    Route::resource('/showtimes', ShowtimeController::class)->only(['index', 'create', 'edit']);
     Route::resource('/seats', SeatController::class)->only(['index', 'update']);
     Route::get('/seats/search', [SeatController::class, 'search'])->name('seat.search'); //search button
     Route::get('/seats/create', [SeatController::class, 'create'])->name('seat.create');

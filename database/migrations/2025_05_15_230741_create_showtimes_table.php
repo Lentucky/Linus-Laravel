@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('showtimes', function (Blueprint $table) {
             $table->id();
-            $table->integer('movie_id');
-            //$table->foreignId('movie_id')->constrained()->onDelete('cascade'); //Foreign key to movies
+            //$table->integer('movie_id');
+            $table->foreignId('movie_id')->constrained()->onDelete('cascade'); //Foreign key to movies
             $table->date('screening_date');
             $table->time('start_time');
             $table->timestamps();
