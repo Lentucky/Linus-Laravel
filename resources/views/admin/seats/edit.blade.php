@@ -7,12 +7,13 @@
     <form action="{{ route('seat.storeedit') }}" method="POST">
         @csrf
         <input type="hidden" id="id" name="id" value="{{ $seat->id }}" required><br>
-        <label for="showtime_id">Showtime_id:</label><br>
-        <select type="text" name="showtime_id"  required>
+        <label for="showtime_id">Showtime Date:</label><br>
+        <select type="text" id="showtime_id" name="showtime_id" required>
 			@foreach($showtimes as $showtime)
-				<option value="{{ $showtime->id }}"{{ $showtime->id == $seat->showtime_id ? 'selected' : ''  }}>{{ $showtime->id }}</option>
+				<option value="{{ $showtime->id }}"{{ $showtime->id == $seat->showtime_id ? 'selected' : ''  }}>ID: {{ $showtime->id }} Movie Title: {{$showtime->movie->title ?? 'No Title'}} Screening Date: {{$showtime->screening_date}} Start Time: {{$showtime->start_time}}</option>
 			@endforeach
 		</select><br>
+        
         <label for="seat_number">Seat Number:</label><br>
         <input type="text" id="seat_number" name="seat_number" value="{{ $seat->seat_number }}" required><br>
         <label for="is_booked">Booked? :</label><br>
@@ -28,6 +29,7 @@
         <button type="submit">Delete Seat</button>
     </form>
 	<script>
+   
         //For validation change if not gonna use
 		toastr.options.timeOut = 0;
 		toastr.options.closeButton = true;

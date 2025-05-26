@@ -12,6 +12,6 @@ class ShowtimeSeeder extends Seeder
      */
     public function run(): void
     {
-        Showtime::factory()->count(50)->create(); 
+        Showtime::factory()->count(10)->create(); 
     }
 }

@@ -9,26 +9,41 @@
     </form>
     <h1>Show seats here</h1>
     <a href="{{ route('seat.create') }}"><button>Create Seats</button></a>
-    @foreach($seats as $seat)
-    <ul>
-        <li>ID:{{$seat->id }} Showtime Start Time: {{ $seat->showtime->start_time }} Seat Number: {{$seat->seat_number}} Booked: @if($seat->is_booked) &#9989; @else &#10060; @endif<a href="{{ route('seat.edit', $seat->id) }}">       <button>Edit</button></a></li>
-    </ul>
 
+    @foreach($showtimes as $showtime)
+        @if($seats->where('showtime_id',$showtime->id)->count() > 0)
 
-    @endforeach
-    {{ $seats->withQueryString()->links(); }}
- 
-    <!-- Another format of admin panel seats -->
-    <h1>Another format NOT BUTTON is a booked</h1> 
-    <div style="display: flex; flex-wrap: wrap;">
-        @foreach($seats as $seat)
-        <div style="margin: 10px; line-height: 75px;">@if($seat->is_booked == false)Seat Number: <a href="{{ route('seat.edit', $seat->id) }}"><button>{{$seat->seat_number}}</button></a>
-        @else
-        Seat Number: <a href="{{ route('seat.edit', $seat->id) }}">{{$seat->seat_number}}</a>
-        
+            
+            <p style="text-align: center;">Movie Title: {{ $showtime->movie->title ?? "No Movie Title" }}</p>
+            <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
+            <div style="display: flex; flex-wrap: wrap;">
+                @foreach($selectedseats = $seats->where('showtime_id', $showtime->id) as $seat)
+                    @if($seat->showtime_id == $showtime->id)
+                        <div ><a href="{{ route('seat.edit', $seat->id) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+                                                <div style="
+                                                    position: relative;
+                                                    text-align: center;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -430%);
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    text-shadow: 2px 2px 5px black;
+                                                    
+                                                ">
+                                                <div>{{ $seat->seat_number }}</div>
+                                                <div>@if($seat->is_booked) &#9989; @else &#10060; @endif</div>
+                                                </div></img>
+                        
+                            </a>
+                        </div>
+                    @endif
+                @endforeach
+            </div> 
         @endif
-        </div>
-        @endforeach
-  
-    </div>
+    @endforeach
+<div style="text-align:center;">{{ $seats->withQueryString()->links() }}</div>
+
+ 
 @endsection

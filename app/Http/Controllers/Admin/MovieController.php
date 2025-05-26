@@ -57,7 +57,7 @@ class MovieController extends Controller
     public function storeedit(Request $request, $id)
     {
         $movie = Movie::findOrFail($id);
-
+        //dd($request->poster_url);
         $validated = $request->validate([
             'genre_id' => 'required|exists:genres,id',
             'title' => 'required|string|max:100',
@@ -65,10 +65,11 @@ class MovieController extends Controller
             'duration' => 'required|integer',
             'poster_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // allow nullable for optional re-upload
         ]);
-
-        if ($request->hasFile('poster_url')) {
+        //dd($request->poster_url);
+        if ($request->poster_url) {
             // delete old image if needed
-            if (file_exists(public_path($movie->poster_url))) {
+            //dd($request->hasFile('poster_url'));
+            if ($movie->poster_url && file_exists(public_path($movie->poster_url))) {
                 unlink(public_path($movie->poster_url));
             }
 
@@ -96,5 +97,18 @@ class MovieController extends Controller
         $movie->delete();
 
         return redirect()->route('movies.index')->with('success',  "Movie succesfully deleted");
-    }    
+    }
+
+    public function search(Request $request)
+        {
+            $query = $request->input('search');
+
+        
+
+            $movies = Movie::when($query, function ($q) use ($query) { 
+                $q->where('title', 'LIKE', "%{$query}%");
+            })->orderBy('created_at', 'DESC')->paginate(10);
+
+            return view('admin.movies.index', compact('movies', 'query'));
+        } 
 }

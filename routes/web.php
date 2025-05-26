@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Seat;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -49,14 +49,22 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('/movies', MovieController::class)->only(['index', 'create', 'store', 'edit']);
+
+    
+    Route::resource('/movies', MovieController::class)->only(['index', 'create', 'store', 'edit', 'search']);
+    Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');
     //Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
     //Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
     //Route::get('/movies/edit/{id}', [MovieController::class, 'edit'])->name('movies.edit');
     Route::put('/movies/{id}/edit', [MovieController::class, 'storeedit'])->name('movies.storeedit');
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
-    Route::resource('/showtimes', ShowtimeController::class)->only(['index', 'create', 'edit']);
+
+    Route::resource('/showtimes', ShowtimeController::class)->only(['index', 'create', 'store', 'edit']);
+    Route::put('/showtimes/{id}/edit', [ShowtimeController::class, 'storeedit'])->name('showtimes.storeedit');
+    Route::delete('/showtimes/{showtime}', [ShowtimeController::class, 'delete'])->name('showtimes.delete');
+
     Route::resource('/seats', SeatController::class)->only(['index', 'update']);
+    Route::post('/seats/book', [SeatController::class, 'book'])->name('seats.book');
     Route::get('/seats/search', [SeatController::class, 'search'])->name('seat.search'); //search button
     Route::get('/seats/create', [SeatController::class, 'create'])->name('seat.create');
     Route::post('/seats/store', [SeatController::class, 'store'])->name('seat.store');    

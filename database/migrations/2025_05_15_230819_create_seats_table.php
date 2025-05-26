@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('seats', function (Blueprint $table) {
-            $table->id();
-           // $table->integer('showtime_id'); //Foreign key to showtimes
+            $table->id();        
             $table->foreignId('showtime_id')->constrained()->onDelete('cascade'); //Foreign key to showtimes
             $table->string('seat_number'); //Example: A1, B5, etc.
             $table->boolean('is_booked')->default(false);

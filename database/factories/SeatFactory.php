@@ -19,7 +19,7 @@ class SeatFactory extends Factory
     {
         return [
             'showtime_id' => Showtime::inRandomOrder()->first()->id,
-            'seat_number' => fake()->unique()->randomDigit(),
+            'seat_number' => fake()->unique()->numberBetween(1,500),
             'is_booked' => fake()->boolean()
         ];
     }

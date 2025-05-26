@@ -19,7 +19,7 @@ class ShowtimeFactory extends Factory
         return [
             'movie_id' => Movie::inRandomOrder()->first()->id,
             'screening_date' => fake()->date($format = 'Y-m-d', $max = 'now'),
-            'start_time' => fake()->time($format = 'H:i:s', $max = 'now')
+            'start_time' => fake()->time($format = 'H:i', $max = 'tomorrow')
         ];
     }
 }

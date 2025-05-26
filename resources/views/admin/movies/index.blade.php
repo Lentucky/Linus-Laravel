@@ -3,8 +3,8 @@
 @section('title', 'Cinema Movies')
 
 @section('content')
-    <form method="GET" action="">
-        <input type="text" name="search" value="" placeholder="Search movies">
+    <form method="GET" action="{{ route('movies.search') }}">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search movies titles">
         <button type="submit">Search</button>
     </form>
     <h1>Show Movies here</h1>
@@ -28,19 +28,23 @@
                 <tr>
                     <td>{{$movie->id}}</td>
                     <td>{{$movie->genre->name ?? 'No Genre'}}</td>
-                    <td>{{$movie->title}}</td>
-                    <td>{{$movie->description}}</td>
+                    <td style="text-align: center;">{{$movie->title}}</td>
+                    <td style="text-align: center; width: 500px;">{{$movie->description}}</td>
                     <td>{{$movie->formatted_duration}}</td>
-                    <td><img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('uploads/' . basename($movie->poster_url)) }}" alt="Uploaded Image"></td>
+                    <td>@if($movie->poster_url)<img style="width: 200px; height: 200px; object-fit: fill;" src="{{ asset('uploads/' . basename($movie->poster_url)) }}" alt="Uploaded Image" />@else
+                    <img style="width: 200px; height: 200px; object-fit: fill;" src="{{ asset('storage/images/noimage.jpg') }}" alt="No Image" />
+                    @endif
+                    
+                    </td>
                     <td><a href="{{ route('movies.edit', $movie->id) }}"> <button>Edit</button></a></td>
                 </tr>
             @endforeach
         </tbody>
 
-
+      
         
     </table>
-    
+      {{ $movies->withQueryString()->links(); }}
 
     
     
