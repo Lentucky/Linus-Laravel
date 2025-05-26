@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use Illuminate\Validation\ValidationException;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Seat;
@@ -9,9 +10,11 @@ use App\Models\Showtime;
 class SeatController extends Controller
 {
     public function index(){
-        $seats = Seat::with('showtime')->orderBy('created_at', 'DESC')->paginate(10);
-        return view('admin.seats.index',[ 'seats' => $seats]);
+        $seats = Seat::orderBy('showtime_id', 'ASC')->paginate(100); // size of the seats
+        $showtimes = Showtime::all();
+        return view('admin.seats.index', compact('seats', 'showtimes'));
     }
+
     public function create(){
         $showtimes = Showtime::with('movie')->get();
         //$takenseats = Seat::where('is_booked', 0)->get();
@@ -25,7 +28,7 @@ class SeatController extends Controller
 
         $validated = $request->validate([
             'showtime_id' => 'required|exists:showtimes,id',
-            'seat_number'=> 'required|integer', //'seat_number'=> 'required|integer|unique:seats,seat_number',
+            'seat_number'=> 'required|string', //'seat_number'=> 'required|integer|unique:seats,seat_number',
             'is_booked' => 'required|boolean'
 
         ]);
@@ -39,7 +42,7 @@ class SeatController extends Controller
     }
 
     public function edit($id){
-        $seat = Seat::where('id', $id)->first();
+        $seat = Seat::findOrFail($id);
         $showtimes = Showtime::all();
         //dd($seat);
         return view('admin.seats.edit', [ 'seat' => $seat, 'showtimes' => $showtimes]);
@@ -70,13 +73,35 @@ class SeatController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('search');
+        $showtimes = Showtime::all();
+        $militaryTime = null;
 
-        $seats = Seat::with('showtime')->when($query, function ($q) use ($query) {
-            $q->where('seat_number', 'LIKE', "%{$query}%")->orWhereHas('showtime', function ($q) use ($query) {
-        $q->where('start_time', 'LIKE', "%{$query}%");
-    });
-        })->paginate(10);
-        //dd($seats->all());
-        return view('admin.seats.index', compact('seats', 'query'));
-    }  
+        if ($query) {
+            // Try parsing as 12-hour time with AM/PM
+            try {
+                $militaryTime = Carbon::createFromFormat('h:i A', strtoupper($query))->format('H:i');
+            } catch (\Exception $e) {
+                // If parsing fails, keep $militaryTime null
+                $militaryTime = null;
+            }
+        }        
+
+        $seats = Seat::when($query, function ($q) use ($query, $militaryTime) {  //remove showtime if not used gonna TODO check if ok
+            $q->where('seat_number', 'LIKE', "%{$query}%")->orWhereHas('showtime', function ($q) use ($query, $militaryTime) {
+                if ($militaryTime) {
+                    // If military time was successfully parsed, search exact or LIKE by military time
+                    $q->where('start_time', 'LIKE', "%{$militaryTime}%");
+                } else {
+                    // Otherwise fallback to searching original query (useful if user typed 24-hour or partial time)
+                    $q->where('start_time', 'LIKE', "%{$query}%");
+                }
+            })->orWhereHas('showtime.movie', function ($q) use ($query) {
+            $q->where('title', 'LIKE', "%{$query}%");
+        });
+        })->orderBy('showtime_id', 'ASC')->paginate(100);
+
+        return view('admin.seats.index', compact('seats', 'query', 'showtimes'));
+    } 
+    
+
 }

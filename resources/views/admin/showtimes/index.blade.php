@@ -8,7 +8,7 @@
         <button type="submit">Search</button>
     </form>
     <h1>Show Showtime here</h1>
-    <a href=""><button>Create Showtime</button></a>
+    <a href="{{ route('showtimes.create') }}"><button>Create Showtime</button></a>
     <table>
         <thead>
             <tr>
@@ -22,8 +22,8 @@
             @foreach($showtimes as $showtime)
                 <tr>
                     <td>{{$showtime->id}}</td>
-                    <td>{{$showtime->movie->title ?? 'No Movie'}}</td>
-                    <td>{{$showtime->screening_time}}</td>
+                    <td style="text-align: center;">{{$showtime->movie->title ?? 'No Movie'}}</td>
+                    <td>{{$showtime->screening_date}}</td>
                     <td>{{$showtime->formatted_start_time}}</td>
                     
                     <td><a href="{{ route('showtimes.edit', $showtime->id) }}"> <button>Edit</button></a></td>

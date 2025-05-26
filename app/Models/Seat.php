@@ -12,6 +12,9 @@ class Seat extends Model
     public function showtime()
     {
         return $this->belongsTo(Showtime::class);
+        
     }
+
+   
     use HasFactory;
 }

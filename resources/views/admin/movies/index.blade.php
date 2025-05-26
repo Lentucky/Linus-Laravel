@@ -3,8 +3,8 @@
 @section('title', 'Cinema Movies')
 
 @section('content')
-    <form method="GET" action="">
-        <input type="text" name="search" value="" placeholder="Search movies">
+    <form method="GET" action="{{ route('movies.search') }}">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search movies titles">
         <button type="submit">Search</button>
     </form>
     <h1>Show Movies here</h1>

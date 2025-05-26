@@ -97,5 +97,18 @@ class MovieController extends Controller
         $movie->delete();
 
         return redirect()->route('movies.index')->with('success',  "Movie succesfully deleted");
-    }    
+    }
+
+    public function search(Request $request)
+        {
+            $query = $request->input('search');
+
+        
+
+            $movies = Movie::when($query, function ($q) use ($query) { 
+                $q->where('title', 'LIKE', "%{$query}%");
+            })->orderBy('created_at', 'DESC')->paginate(10);
+
+            return view('admin.movies.index', compact('movies', 'query'));
+        } 
 }

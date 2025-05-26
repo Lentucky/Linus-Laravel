@@ -179,8 +179,10 @@ class AllSeeder extends Seeder
             'duration' => 201,
             'genre_id' => 10 // Fantasy
         ]);
+      
         Showtime::factory()->count(10)->create();
-        Seat::factory()->count(10)->create(); 
+         
+        //Seat::factory()->create(); 
         
     }
 }
