@@ -7,31 +7,31 @@
         <input type="text" name="search" value="" placeholder="Search showtime, seats...">
         <button type="submit">Search</button>
     </form>
-    <h1>Show Showtime here</h1>
-    <a href="{{ route('showtimes.create') }}"><button>Create Showtime</button></a>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Movie Title</th>
-                <th>Screening Time</th>
-                <th>Start Time</th>              
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($showtimes as $showtime)
+    <div class="mas-w-6xl mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Show Showtime here</h1>
+        <a href="{{ route('showtimes.create') }}"><button>Create Showtime</button></a>
+        <table class="w-full bg-white shadow border rounded mt-4 text-sm">
+            <thead class="bg-gray-100">
                 <tr>
-                    <td>{{$showtime->id}}</td>
-                    <td style="text-align: center;">{{$showtime->movie->title ?? 'No Movie'}}</td>
-                    <td>{{$showtime->screening_date}}</td>
-                    <td>{{$showtime->formatted_start_time}}</td>
-                    
-                    <td><a href="{{ route('showtimes.edit', $showtime->id) }}"> <button>Edit</button></a></td>
+                    <th>ID</th>
+                    <th>Movie Title</th>
+                    <th>Screening Time</th>
+                    <th>Start Time</th>
                 </tr>
-            @endforeach
-        </tbody>
-
-
+            </thead>
+            <tbody>
+                @foreach($showtimes as $showtime)
+                    <tr class="border-t">
+                        <td class="p-2">{{$showtime->id}}</td>
+                        <td style="text-align: center;" class="p-2">{{$showtime->movie->title ?? 'No Movie'}}</td>
+                        <td class="p-2">{{$showtime->screening_date}}</td>
+                        <td class="p-2">{{$showtime->formatted_start_time}}</td>
         
-    </table>
+                        <td><a href="{{ route('showtimes.edit', $showtime->id) }}"> <button class="text-blue-600 hover:underline">Edit</button></a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        
+        </table>
+    </div>
 @endsection
