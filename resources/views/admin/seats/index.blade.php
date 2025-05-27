@@ -7,9 +7,9 @@
         <label for="showtime_id">Showtimes:</label>
         <select name="showtime_id" id="showtime_id">
             <option value="">-- All Cinemas --</option>
-            @foreach($showtimes as $showtime)
-                <option value="{{ $showtime->id }}" {{ request('search') == $showtime->id ? 'selected' : '' }}>
-                    Title: {{ $showtime->movie->title }} Date: {{ $showtime->screening_date}}
+            @foreach($allshowtimes as $showtime)
+                <option value="{{ $showtime->id }}" {{ request('showtime_id') == $showtime->id ? 'selected' : '' }}>
+                    Title: {{ $showtime->movie->title }} Screening Date: {{ $showtime->screening_date}} Start Time: {{ $showtime->start_time }}
                 </option>
             @endforeach
         </select>
@@ -20,15 +20,16 @@
     <a href="{{ route('seat.create') }}"><button>Create Seats</button></a>
 
     @foreach($showtimes as $showtime)
-        @if($seats->where('showtime_id',$showtime->id)->count() > 0)
+    
 
             
             <p style="text-align: center;">Movie Title: {{ $showtime->movie->title ?? "No Movie Title" }}</p>
+            <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
             <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
             <div style="display: flex; flex-wrap: wrap;">
-                @foreach($selectedseats = $seats->where('showtime_id', $showtime->id) as $seat)
-                    @if($seat->showtime_id == $showtime->id)
-                        <div ><a href="{{ route('seat.edit', $seat->id) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+                @foreach($seats->where('showtime_id', $showtime->id) as $seat)
+                    @if($seat->showtime_id == $showtime->id) 
+                        <div ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => $showtime->id]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
                                                 <div style="
                                                     position: relative;
                                                     text-align: center;
@@ -50,9 +51,15 @@
                     @endif
                 @endforeach
             </div> 
-        @endif
+            
+    <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>   
     @endforeach
-<div style="text-align:center;">{{ $seats->withQueryString()->links() }}</div>
 
+<div style="text-align:center;">{{ $showtimes->withQueryString()->links() }}</div>
+<script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to generate seats? WILL DUPLICATE");
+        }
+</script>
  
 @endsection

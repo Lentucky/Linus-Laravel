@@ -57,12 +57,11 @@
         @if(session('success'))
             <p style="color:green">{{ session('success') }}</p>
         @endif
-        @foreach($movies as $movie)
-            <h2>{{ $movie->title }}</h2>
-            <p>{{ $movie->description }}</p>
-            @foreach($showtimes as $showtime)
-                @if($showtime->movie_id == $movie->id)
-                    <h3>Showtime: {{ $showtime->start_time }}</h3>
+        <h1>Todays Showing</h1>
+            @foreach($currentshowing as $showtime)
+                    <h1>{{ $showtime->movie->title }}</h1>
+                    <h1>{{ $showtime->screening_date }}</h1>
+                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
                     <form method="POST" action="">
                         @csrf
                         <div>
@@ -84,9 +83,8 @@
                         </div>
                         <!--<button type="submit">Book Selected Seat</button>-->
                     </form>
-                @endif
+               
             @endforeach
-        @endforeach
     </main>
 
 </body>
