@@ -49,46 +49,45 @@
     </style>
 </head>
 <body>
-    <h1>Cinema Booking Dashboard</h1>
-
-    @if(session('error'))
-        <p style="color:red">{{ session('error') }}</p>
-    @endif
-    @if(session('success'))
-        <p style="color:green">{{ session('success') }}</p>
-    @endif
-
-    @foreach($movies as $movie)
-        <h2>{{ $movie->title }}</h2>
-        <p>{{ $movie->description }}</p>
-
-        @foreach($showtimes as $showtime)
-            @if($showtime->movie_id == $movie->id)
-                <h3>Showtime: {{ $showtime->start_time }}</h3>
-                <form method="POST" action="">
-                    @csrf
-                    <div>
-                        @foreach($seats as $seat)
-                            @if($seat->showtime_id == $showtime->id)
-                                <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
-                                    <input 
-                                        type="radio" 
-                                        name="seat_id" 
-                                        value="{{ $seat->id }}" 
-                                        {{ $seat->is_booked ? 'disabled' : '' }}
-                                        class="seat-input"
-                                        style="display:none"
-                                    >
-                                    <span>{{ $seat->seat_number }}</span>
-                                </label>
-                            @endif
-                        @endforeach
-                    </div>
-                    <!--<button type="submit">Book Selected Seat</button>-->
-                </form>
-            @endif
+    <main>
+        <h1>Cinema Booking Dashboard</h1>
+        @if(session('error'))
+            <p style="color:red">{{ session('error') }}</p>
+        @endif
+        @if(session('success'))
+            <p style="color:green">{{ session('success') }}</p>
+        @endif
+        @foreach($movies as $movie)
+            <h2>{{ $movie->title }}</h2>
+            <p>{{ $movie->description }}</p>
+            @foreach($showtimes as $showtime)
+                @if($showtime->movie_id == $movie->id)
+                    <h3>Showtime: {{ $showtime->start_time }}</h3>
+                    <form method="POST" action="">
+                        @csrf
+                        <div>
+                            @foreach($seats as $seat)
+                                @if($seat->showtime_id == $showtime->id)
+                                    <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
+                                        <input
+                                            type="radio"
+                                            name="seat_id"
+                                            value="{{ $seat->id }}"
+                                            {{ $seat->is_booked ? 'disabled' : '' }}
+                                            class="seat-input"
+                                            style="display:none"
+                                        >
+                                        <span>{{ $seat->seat_number }}</span>
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+                        <!--<button type="submit">Book Selected Seat</button>-->
+                    </form>
+                @endif
+            @endforeach
         @endforeach
-    @endforeach
+    </main>
 
 </body>
 </html>

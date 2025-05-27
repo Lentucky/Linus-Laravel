@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Cinema Booking System')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @auth
+        @if (Auth::user()->role === 'admin')
+            @vite('resources/css/admin.css')
+        @else
+            @vite('resources/css/app.css')
+        @endif
+    @else
+        @vite('resources/css/app.css')
+    @endauth
+
 
     <!-- ADDED FOR TOASTR LIBRARY  REMOVE IF NOT GONNA USE-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,8 +42,29 @@
         @yield('content')
     </main>
 
-    <footer>
-        <p>&copy; {{ date('Y') }} My Cinema</p>
+    <footer class="bg-gray-900 text-gray-300 mt-10">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <!-- Branding -->
+            <div>
+                <h3 class="text-xl font-semibold text-white">🎬 My Cinema</h3>
+                <p class="mt-2 text-sm">
+                    Your favorite movie spot for all the latest blockbusters. Book. Watch. Enjoy.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="font-semibold text-white mb-3">Contact Us</h4>
+                <ul class="text-sm space-y-2">
+                    <li>Email: support@mycinema.com</li>
+                    <li>Phone: +63 912 345 6789</li>
+                    <li>Location: NU Laguna, Philippines</li>
+                </ul>
+            </div>
+
+        <div class="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
+            &copy; {{ date('Y') }} My Cinema. All rights reserved.
+        </div>
     </footer>
 
     <script src="{{ asset('js/app.js') }}"></script>

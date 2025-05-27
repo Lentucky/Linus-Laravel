@@ -1,7 +1,8 @@
 <nav>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="{{ route('customer.movies.index') }}">Movies</a></li>
+        <li><a href="{{ route('customer.movies.index') }}">Showing</a></li>
+        <li><a href="{{ route('customer.movies.index') }}">Upcoming</a></li>
         {{-- <li><a href="{{ route('customer.showtimes') }}">Showtimes</a></li> --}}
         <li><a href="{{ route('customer.bookings.history') }}">Profile</a></li>
         

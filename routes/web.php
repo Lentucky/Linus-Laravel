@@ -71,5 +71,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
     Route::post('/seats/edit', [SeatController::class, 'storeedit'])->name('seat.storeedit');
     Route::delete('/seats/{seat}', [SeatController::class, 'delete'])->name('seat.delete');
+    
     Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
 });
