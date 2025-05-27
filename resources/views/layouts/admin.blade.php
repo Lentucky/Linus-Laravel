@@ -6,6 +6,7 @@
             <li><a href="{{ route('movies.index') }}" class="hover:text-yellow-400">Movies</a></li>
             <li><a href="{{ route('showtimes.index') }}" class="hover:text-yellow-400">Showtimes</a></li>
             <li><a href="{{ route('seats.index') }}" class="hover:text-yellow-400">Seats</a></li>
+            <a href="{{ route('customers.index') }}" class="hover:text-yellow-400">Customers</a>
             <li><a href="{{ route('admin.reports.index') }}" class="hover:text-yellow-400">Reports</a></li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">

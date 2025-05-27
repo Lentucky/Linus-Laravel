@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\ShowtimeController;
 use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\CustomerController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -72,5 +73,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/seats/edit', [SeatController::class, 'storeedit'])->name('seat.storeedit');
     Route::delete('/seats/{seat}', [SeatController::class, 'delete'])->name('seat.delete');
     
+    Route::resource('/customers', CustomerController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/customers/store', [CustomerController::class, 'store'])->name('customers.store');    
+    Route::get('/customers/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.delete');
+
     Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
 });
