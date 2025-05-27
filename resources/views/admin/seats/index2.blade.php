@@ -1,3 +1,8 @@
+        <form method="GET" action="{{ route('seat.search') }}">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search showtime, seats...">
+        <button type="submit">Search</button>
+    </form>
+    
     @foreach($showtimes as $showtime)
         @if($seats->where('showtime_id',$showtime->id)->count() > 0)
             <p>Showtime: {{ $showtime->start_time }}</p>

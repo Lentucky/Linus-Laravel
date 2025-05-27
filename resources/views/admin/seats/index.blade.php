@@ -4,7 +4,16 @@
 
 @section('content')
     <form method="GET" action="{{ route('seat.search') }}">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search showtime, seats...">
+        <label for="showtime_id">Showtimes:</label>
+        <select name="showtime_id" id="showtime_id">
+            <option value="">-- All Cinemas --</option>
+            @foreach($showtimes as $showtime)
+                <option value="{{ $showtime->id }}" {{ request('search') == $showtime->id ? 'selected' : '' }}>
+                    Title: {{ $showtime->movie->title }} Date: {{ $showtime->screening_date}}
+                </option>
+            @endforeach
+        </select>
+
         <button type="submit">Search</button>
     </form>
     <h1>Show seats here</h1>

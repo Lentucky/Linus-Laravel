@@ -70,6 +70,32 @@ class SeatController extends Controller
         return redirect()->route('seats.index')->with('success',  "Seat succesfully deleted");
     }
 
+
+    public function search(Request $request)
+    {
+        //dd($request->all());
+        //$query = Seat::query();
+        $query = $request->showtime_id;
+        $showtimes = Showtime::all();
+        //dd($query);
+       
+        //dd($query->get());
+
+        
+      $seats = Seat::when($query, function ($q) use ($query) {
+        if (is_numeric($query)) {
+            $q->where('showtime_id', $query);
+        } 
+        })->orderBy('showtime_id', 'ASC')->paginate(100);
+        
+
+        
+        //dd($seats);
+        return view('admin.seats.index', compact('seats', 'query', 'showtimes'));
+    } 
+
+    /*
+    
     public function search(Request $request)
     {
         $query = $request->input('search');
@@ -102,6 +128,7 @@ class SeatController extends Controller
 
         return view('admin.seats.index', compact('seats', 'query', 'showtimes'));
     } 
+        */
     
 
 }
