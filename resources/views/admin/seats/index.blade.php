@@ -26,16 +26,18 @@
             <p style="text-align: center;">Movie Title: {{ $showtime->movie->title ?? "No Movie Title" }}</p>
             <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
             <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
-            <div style="display: flex; flex-wrap: wrap;">
+
+            <p style="text-align: center;">SCREEN</P>
+            <div style="margin: auto; width: 1400px; display: flex; flex-wrap: wrap;">
                 @foreach($seats->where('showtime_id', $showtime->id) as $seat)
                     @if($seat->showtime_id == $showtime->id) 
-                        <div ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => $showtime->movie->id, 'page' => request('page', 1)]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+                        <div ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => request('movie_id'), 'page' => request('page', 1)]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
                                                 <div style="
                                                     position: relative;
                                                     text-align: center;
                                                     top: 50%;
                                                     left: 50%;
-                                                    transform: translate(-50%, -430%);
+                                                    transform: translate(-50%, -350%);
                                                     color: white;
                                                     font-size: 10px;
                                                     font-weight: bold;

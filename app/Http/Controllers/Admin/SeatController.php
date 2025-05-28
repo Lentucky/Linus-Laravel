@@ -66,7 +66,12 @@ class SeatController extends Controller
         $page = $request->input('page', 1);
         //dd($page);
         Seat::where('id', $request->id)->update($validated);
-            
+        //dd($search);
+        if(!$search){
+            return redirect()->route('seat.search', [
+                'page' => $page
+            ])->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
+        }
         return redirect()->route('seat.search', [
             'movie_id' => $search,
             'page' => $page
