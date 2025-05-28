@@ -68,13 +68,13 @@ class SeatController extends Controller
         Seat::where('id', $request->id)->update($validated);
         //dd($search);
         if(!$search){
-            return redirect()->route('seat.search', [
+            return redirect()->route('seats.index', [
                 'page' => $page
             ])->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
         }
         return redirect()->route('seat.search', [
             'movie_id' => $search,
-            'page' => $page
+            'page' => $page,
             ])->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
 
     }
