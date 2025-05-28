@@ -7,13 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Seat;
 use App\Models\Showtime;
+use App\Models\Movie;
 class SeatController extends Controller
 {
     public function index(Request $request){
         $seats = Seat::all(); // size of the seats
-        $allshowtimes = Showtime::all();
+        $allmovies = Movie::all();
+        $movies = Movie::orderBy('title', 'ASC')->paginate(1);
         $showtimes = Showtime::orderBy('id', 'ASC')->paginate(1);
-        return view('admin.seats.index', compact('seats', 'showtimes', 'allshowtimes'));
+        return view('admin.seats.index', compact('seats', 'showtimes', 'allmovies', 'movies'));
     }
 
     public function create(){
@@ -46,8 +48,9 @@ class SeatController extends Controller
         $seat = Seat::findOrFail($id);
         $showtimes = Showtime::all();
         $search = $request->input('search');
-        //dd($request->input('search'));
-        return view('admin.seats.edit', compact('seat', 'showtimes', 'search'));
+        $page = $request->input('page', 1);
+
+        return view('admin.seats.edit', compact('seat', 'showtimes', 'search', 'page'));
     }
 
     public function storeedit(Request $request){
@@ -60,11 +63,13 @@ class SeatController extends Controller
 
         ]);
         $search = $request->input('search');
-        //dd($validated);
+        $page = $request->input('page', 1);
+        //dd($page);
         Seat::where('id', $request->id)->update($validated);
             
         return redirect()->route('seat.search', [
-            'showtime_id' => $search,
+            'movie_id' => $search,
+            'page' => $page
             ])->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
 
     }
@@ -80,27 +85,30 @@ class SeatController extends Controller
     {
         //dd($request->all());
         //$query = Seat::query();
-        $query = $request->showtime_id;
+        $query = $request->movie_id;
         $allshowtimes = Showtime::all();
         //dd($query);
-       
+        $allmovies = Movie::all();
         //dd($query->get());
+        $seats = Seat::all();
         $showtimes = Showtime::when($query, function ($q) use ($query) {
                 if (is_numeric($query)) {
-                    $q->where('id', $query);
+                    $q->where('movie_id', $query);
                 } 
                 })->orderBy('id', 'ASC')->paginate(1);
+
         
+        /*
         $seats = Seat::when($query, function ($q) use ($query) {
             if (is_numeric($query)) {
                 $q->where('showtime_id', $query);
             } 
             })->orderBy('showtime_id', 'ASC')->paginate(100);
-        
+        */
 
         
         //dd($seats);
-        return view('admin.seats.index', compact('seats', 'query', 'showtimes','allshowtimes'));
+        return view('admin.seats.index', compact('seats', 'query', 'showtimes', 'allmovies'));
     } 
 
     /*

@@ -4,12 +4,12 @@
 
 @section('content')
     <form method="GET" action="{{ route('seat.search') }}">
-        <label for="showtime_id">Showtimes:</label>
-        <select name="showtime_id" id="showtime_id">
-            <option value="">-- All Cinemas --</option>
-            @foreach($allshowtimes as $showtime)
-                <option value="{{ $showtime->id }}" {{ request('showtime_id') == $showtime->id ? 'selected' : '' }}>
-                    Title: {{ $showtime->movie->title }} Screening Date: {{ $showtime->screening_date}} Start Time: {{ $showtime->start_time }}
+        <label for="movie_id">Movies:</label>
+        <select name="movie_id" id="movie_id">
+            <option value="">-- All Movies --</option>
+            @foreach($allmovies as $movie)
+                <option value="{{ $movie->id }}" {{ request('movie_id') == $movie->id ? 'selected' : '' }}>
+                    Title: {{ $movie->title }} 
                 </option>
             @endforeach
         </select>
@@ -29,7 +29,7 @@
             <div style="display: flex; flex-wrap: wrap;">
                 @foreach($seats->where('showtime_id', $showtime->id) as $seat)
                     @if($seat->showtime_id == $showtime->id) 
-                        <div ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => $showtime->id]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+                        <div ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => $showtime->movie->id, 'page' => request('page', 1)]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
                                                 <div style="
                                                     position: relative;
                                                     text-align: center;
@@ -43,7 +43,7 @@
                                                     
                                                 ">
                                                 <div>{{ $seat->seat_number }}</div>
-                                                <div>@if($seat->is_booked) &#9989; @else &#10060; @endif</div>
+                                                <div>@if($seat->is_booked) &#10060; @else &#9989; @endif</div>
                                                 </div></img>
                         
                             </a>
