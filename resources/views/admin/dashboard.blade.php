@@ -57,12 +57,11 @@
         @if(session('success'))
             <p style="color:green">{{ session('success') }}</p>
         @endif
-        @foreach($movies as $movie)
-            <h2>{{ $movie->title }}</h2>
-            <p>{{ $movie->description }}</p>
-            @foreach($showtimes as $showtime)
-                @if($showtime->movie_id == $movie->id)
-                    <h3>Showtime: {{ $showtime->start_time }}</h3>
+        <h1 style="text-align: center;">Todays Showing</h1>
+            @foreach($currentshowing as $showtime)
+                    <h1>{{ $showtime->movie->title }}</h1>
+                    <h1>{{ $showtime->screening_date }}</h1>
+                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
                     <form method="POST" action="">
                         @csrf
                         <div>
@@ -84,9 +83,66 @@
                         </div>
                         <!--<button type="submit">Book Selected Seat</button>-->
                     </form>
-                @endif
+               
             @endforeach
-        @endforeach
+            <h1 style="text-align: center;">Upcoming Showing</h1>
+            @foreach($upcomingshowing as $showtime)
+                    <h1>{{ $showtime->movie->title }}</h1>
+                    <h1>{{ $showtime->screening_date }}</h1>
+                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
+                    <form method="POST" action="">
+                        @csrf
+                        <div>
+                            @foreach($seats as $seat)
+                                @if($seat->showtime_id == $showtime->id)
+                                    <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
+                                        <input
+                                            type="radio"
+                                            name="seat_id"
+                                            value="{{ $seat->id }}"
+                                            {{ $seat->is_booked ? 'disabled' : '' }}
+                                            class="seat-input"
+                                            style="display:none"
+                                        >
+                                        <span>{{ $seat->seat_number }}</span>
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+       
+                    </form>
+               
+            @endforeach
+
+            <h1 style="text-align: center;">Past Showing</h1>
+            @foreach($pastshowing as $showtime)
+                    <h1>{{ $showtime->movie->title }}</h1>
+                    <h1>{{ $showtime->screening_date }}</h1>
+                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
+                    <form method="POST" action="">
+                        @csrf
+                        <div>
+                            @foreach($seats as $seat)
+                                @if($seat->showtime_id == $showtime->id)
+                                    <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
+                                        <input
+                                            type="radio"
+                                            name="seat_id"
+                                            value="{{ $seat->id }}"
+                                            {{ $seat->is_booked ? 'disabled' : '' }}
+                                            class="seat-input"
+                                            style="display:none"
+                                        >
+                                        <span>{{ $seat->seat_number }}</span>
+                                    </label>
+                                @endif
+                            @endforeach
+                        </div>
+       
+                    </form>
+               
+            @endforeach
+            <div style="text-align:center;">{{ $pastshowing->withQueryString()->links() }}</div>
     </main>
 
 </body>

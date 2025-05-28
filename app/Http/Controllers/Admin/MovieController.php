@@ -107,7 +107,7 @@ class MovieController extends Controller
 
             $movies = Movie::when($query, function ($q) use ($query) { 
                 $q->where('title', 'LIKE', "%{$query}%");
-            })->orderBy('created_at', 'DESC')->paginate(10);
+            })->orderBy('title', 'DESC')->paginate(10);
 
             return view('admin.movies.index', compact('movies', 'query'));
         } 

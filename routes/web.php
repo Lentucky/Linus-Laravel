@@ -72,6 +72,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
     Route::post('/seats/edit', [SeatController::class, 'storeedit'])->name('seat.storeedit');
     Route::delete('/seats/{seat}', [SeatController::class, 'delete'])->name('seat.delete');
+    Route::get('/seats/generate/{id}', [SeatController::class, 'generateSeats'])->name('seat.generate'); //search button
     
     Route::resource('/customers', CustomerController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');

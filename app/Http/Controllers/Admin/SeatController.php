@@ -7,12 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Seat;
 use App\Models\Showtime;
+use App\Models\Movie;
 class SeatController extends Controller
 {
-    public function index(){
-        $seats = Seat::orderBy('showtime_id', 'ASC')->paginate(100); // size of the seats
-        $showtimes = Showtime::all();
-        return view('admin.seats.index', compact('seats', 'showtimes'));
+    public function index(Request $request){
+        $seats = Seat::all(); // size of the seats
+        $allmovies = Movie::all();
+        $movies = Movie::orderBy('title', 'ASC')->paginate(1);
+        $showtimes = Showtime::orderBy('id', 'ASC')->paginate(1);
+        return view('admin.seats.index', compact('seats', 'showtimes', 'allmovies', 'movies'));
     }
 
     public function create(){
@@ -41,11 +44,13 @@ class SeatController extends Controller
         return redirect()->route('seats.index')->with('success',  "Seat succesfully added");    //remove with if not gonna use     
     }
 
-    public function edit($id){
+    public function edit($id, Request $request){
         $seat = Seat::findOrFail($id);
         $showtimes = Showtime::all();
-        //dd($seat);
-        return view('admin.seats.edit', [ 'seat' => $seat, 'showtimes' => $showtimes]);
+        $search = $request->input('search');
+        $page = $request->input('page', 1);
+
+        return view('admin.seats.edit', compact('seat', 'showtimes', 'search', 'page'));
     }
 
     public function storeedit(Request $request){
@@ -57,10 +62,20 @@ class SeatController extends Controller
             'is_booked' => 'required|boolean'
 
         ]);
-        //dd($validated);
+        $search = $request->input('search');
+        $page = $request->input('page', 1);
+        //dd($page);
         Seat::where('id', $request->id)->update($validated);
-            
-        return redirect()->route('seats.index')->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
+        //dd($search);
+        if(!$search){
+            return redirect()->route('seats.index', [
+                'page' => $page
+            ])->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
+        }
+        return redirect()->route('seat.search', [
+            'movie_id' => $search,
+            'page' => $page,
+            ])->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
 
     }
 
@@ -75,23 +90,30 @@ class SeatController extends Controller
     {
         //dd($request->all());
         //$query = Seat::query();
-        $query = $request->showtime_id;
-        $showtimes = Showtime::all();
+        $query = $request->movie_id;
+        $allshowtimes = Showtime::all();
         //dd($query);
-       
+        $allmovies = Movie::all();
         //dd($query->get());
+        $seats = Seat::all();
+        $showtimes = Showtime::when($query, function ($q) use ($query) {
+                if (is_numeric($query)) {
+                    $q->where('movie_id', $query);
+                } 
+                })->orderBy('id', 'ASC')->paginate(1);
 
         
-      $seats = Seat::when($query, function ($q) use ($query) {
-        if (is_numeric($query)) {
-            $q->where('showtime_id', $query);
-        } 
-        })->orderBy('showtime_id', 'ASC')->paginate(100);
-        
+        /*
+        $seats = Seat::when($query, function ($q) use ($query) {
+            if (is_numeric($query)) {
+                $q->where('showtime_id', $query);
+            } 
+            })->orderBy('showtime_id', 'ASC')->paginate(100);
+        */
 
         
         //dd($seats);
-        return view('admin.seats.index', compact('seats', 'query', 'showtimes'));
+        return view('admin.seats.index', compact('seats', 'query', 'showtimes', 'allmovies'));
     } 
 
     /*
@@ -130,5 +152,22 @@ class SeatController extends Controller
     } 
         */
     
-
+    public function generateSeats($id){
+        //add validation RESET ALL RELATED SEAT AT SHOWID, delete or update.
+        
+        $rows = range('A', 'J'); // Letters A to J for rows
+        $columns = range(1, 10); // Numbers 1 to 10 for columns
+            foreach ($rows as $row) {
+                foreach ($columns as $col) {
+                    Seat::create([
+                        'showtime_id' => $id,
+                        'seat_number' => $row . $col,
+                        'is_booked' => false,
+                    ]);
+                }
+            }
+    return redirect()->route('seat.search', [
+            'showtime_id' => $id,
+            ])->with('success',  "Seat succesfully generated");   //remove with if not gonna use         
+    }
 }

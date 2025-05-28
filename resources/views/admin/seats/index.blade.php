@@ -4,12 +4,12 @@
 
 @section('content')
     <form method="GET" action="{{ route('seat.search') }}">
-        <label for="showtime_id">Showtimes:</label>
-        <select name="showtime_id" id="showtime_id">
-            <option value="">-- All Cinemas --</option>
-            @foreach($showtimes as $showtime)
-                <option value="{{ $showtime->id }}" {{ request('search') == $showtime->id ? 'selected' : '' }}>
-                    Title: {{ $showtime->movie->title }} Date: {{ $showtime->screening_date}}
+        <label for="movie_id">Movies:</label>
+        <select name="movie_id" id="movie_id">
+            <option value="">-- All Movies --</option>
+            @foreach($allmovies as $movie)
+                <option value="{{ $movie->id }}" {{ request('movie_id') == $movie->id ? 'selected' : '' }}>
+                    Title: {{ $movie->title }} 
                 </option>
             @endforeach
         </select>
@@ -20,21 +20,24 @@
     <a href="{{ route('seat.create') }}"><button>Create Seats</button></a>
 
     @foreach($showtimes as $showtime)
-        @if($seats->where('showtime_id',$showtime->id)->count() > 0)
+    
 
             
             <p style="text-align: center;">Movie Title: {{ $showtime->movie->title ?? "No Movie Title" }}</p>
+            <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
             <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
-            <div style="display: flex; flex-wrap: wrap;">
-                @foreach($selectedseats = $seats->where('showtime_id', $showtime->id) as $seat)
-                    @if($seat->showtime_id == $showtime->id)
-                        <div ><a href="{{ route('seat.edit', $seat->id) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+
+            <p style="text-align: center;">SCREEN</P>
+            <div style="margin: auto; width: 1400px; display: flex; flex-wrap: wrap;">
+                @foreach($seats->where('showtime_id', $showtime->id) as $seat)
+                    @if($seat->showtime_id == $showtime->id) 
+                        <div ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => request('movie_id'), 'page' => request('page', 1)]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
                                                 <div style="
                                                     position: relative;
                                                     text-align: center;
                                                     top: 50%;
                                                     left: 50%;
-                                                    transform: translate(-50%, -430%);
+                                                    transform: translate(-50%, -350%);
                                                     color: white;
                                                     font-size: 10px;
                                                     font-weight: bold;
@@ -42,7 +45,7 @@
                                                     
                                                 ">
                                                 <div>{{ $seat->seat_number }}</div>
-                                                <div>@if($seat->is_booked) &#9989; @else &#10060; @endif</div>
+                                                <div>@if($seat->is_booked) &#10060; @else &#9989; @endif</div>
                                                 </div></img>
                         
                             </a>
@@ -50,9 +53,15 @@
                     @endif
                 @endforeach
             </div> 
-        @endif
+            
+    <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>   
     @endforeach
-<div style="text-align:center;">{{ $seats->withQueryString()->links() }}</div>
 
+<div style="text-align:center;">{{ $showtimes->withQueryString()->links() }}</div>
+<script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to generate seats? WILL DUPLICATE");
+        }
+</script>
  
 @endsection
