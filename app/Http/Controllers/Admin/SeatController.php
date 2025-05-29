@@ -13,11 +13,9 @@ class SeatController extends Controller
     public function index(Request $request){
         $seats = Seat::all(); // size of the seats
         $allmovies = Movie::all();
-        $movies = Movie::paginate(1);
-        $allshowtimes = Showtime::all();
-        $showtimes = Showtime::all();
-
-        return view('admin.seats.index', compact('seats', 'showtimes', 'allshowtimes', 'allmovies', 'movies'));
+        $movies = Movie::orderBy('title', 'ASC')->paginate(1);
+        $showtimes = Showtime::orderBy('title', 'ASC')->paginate(1);
+        return view('admin.seats.index', compact('seats', 'showtimes', 'allmovies', 'movies'));
     }
 
     public function create(){
@@ -103,8 +101,9 @@ class SeatController extends Controller
                     $q->where('movie_id', $query);
                 } 
                 })->orderBy('id', 'ASC')->paginate(1);
-
         
+        /*
+        $sea
         /*
         $seats = Seat::when($query, function ($q) use ($query) {
             if (is_numeric($query)) {
@@ -135,7 +134,7 @@ class SeatController extends Controller
                 } 
                 })->get();
 
-        //dd($showtimes->get());
+        //dd($showtimes->first());
         /*
         $seats = Seat::when($query, function ($q) use ($query) {
             if (is_numeric($query)) {
