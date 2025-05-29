@@ -28,7 +28,7 @@ class LoginController extends Controller
             $user = Auth::user();
             return match ($user->role) {
                 'admin' => redirect()->intended('admin/dashboard'),
-                'customer' => redirect()->intended('/dashboard'),
+                'customer' => redirect()->intended(route('home')),
                 default => abort(403, 'Unknown role'),
             };
         }

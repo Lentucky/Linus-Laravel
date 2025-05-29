@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ShowtimeController;
 use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\HomeController;
+
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -21,6 +23,7 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 }) -> name('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Guest Routes
 Route::view('/guest/movies', 'guest.movies')->name('guest.movies');
