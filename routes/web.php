@@ -48,6 +48,11 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/bookings', [CustomerBookingController::class, 'index'])->name('customer.bookings.index');
     Route::post('/bookings', [CustomerBookingController::class, 'store'])->name('customer.bookings.store');
     Route::get('/bookings/history', [CustomerBookingController::class, 'history'])->name('customer.bookings.history');
+
+    Route::get('/bookings/select-showtime/{movie}', [CustomerBookingController::class, 'selectShowtime'])->name('customer.bookings.selectShowtime');
+    Route::get('/bookings/select-seat/{showtime}', [CustomerBookingController::class, 'selectSeat'])->name('customer.bookings.selectSeat');
+    Route::post('/bookings/confirm', [CustomerBookingController::class, 'confirmBooking'])->name('customer.bookings.confirm');
+
 });
 
 // Admin Routes
