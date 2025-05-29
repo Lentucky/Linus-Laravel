@@ -15,6 +15,6 @@ class UpcomingController extends Controller
         })
         ->get();
         //dd($movies);
-        return view('customer.showing', compact('movies'));
+        return view('customer.upcoming', compact('movies'));
     }
 }
