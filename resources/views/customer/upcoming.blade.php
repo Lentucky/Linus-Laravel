@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome')
+@section('title', 'Now Showing')
 
 @section('content')
 <div class="max-w-6xl mx-auto py-6 px-4">
-    <h1 class="text-2xl font-bold mb-4">Now Showing</h1>
+    <h1 class="text-2xl font-bold mb-4">Upcoming Shows</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @foreach ($movies as $movie)
