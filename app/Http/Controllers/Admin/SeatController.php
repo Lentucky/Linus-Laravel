@@ -14,7 +14,7 @@ class SeatController extends Controller
         $seats = Seat::all(); // size of the seats
         $allmovies = Movie::all();
         $movies = Movie::orderBy('title', 'ASC')->paginate(1);
-        $showtimes = Showtime::orderBy('movie_id', 'ASC')->paginate(1);
+        $showtimes = Showtime::orderBy('title', 'ASC')->paginate(1);
         return view('admin.seats.index', compact('seats', 'showtimes', 'allmovies', 'movies'));
     }
 
