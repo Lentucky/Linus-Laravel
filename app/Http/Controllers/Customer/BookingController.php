@@ -73,7 +73,7 @@ class BookingController extends Controller
     public function selectSeat($showtimeId)
     {
         $showtime = \App\Models\Showtime::with('movie')->findOrFail($showtimeId);
-        $seats = \App\Models\Seat::where('showtime_id', $showtimeId)->where('is_booked', false)->get();
+        $seats = \App\Models\Seat::where('showtime_id', $showtimeId)->get();
 
         return view('customer.booking.select-seat', compact('showtime', 'seats'));
     }
