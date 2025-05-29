@@ -100,7 +100,7 @@ class SeatController extends Controller
                 if (is_numeric($query)) {
                     $q->where('movie_id', $query);
                 } 
-                })->orderBy('id', 'ASC')->paginate(1);
+                })->orderBy('screening_date', 'DESC')->paginate(1);
         
         /*
         $sea

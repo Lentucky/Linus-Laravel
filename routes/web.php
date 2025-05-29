@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\Customer\ShowingController as CustomerShowingController;
+use App\Http\Controllers\Customer\UpcomingController as CustomerUpcomingController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -44,6 +45,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     })->name('customer.dashboard');
 
     Route::get('/movies', [CustomerMovieController::class, 'index'])->name('customer.movies.index');
+    Route::get('/showing', [CustomerShowingController::class, 'index'])->name('customer.showing');
+    Route::get('/upcoming', [CustomerUpcomingController::class, 'index'])->name('customer.upcoming');
     // Route::get('/showtimes', [CustomerMovieController::class, 'index'])->name('customer.showtimes.index');
     Route::get('/bookings', [CustomerBookingController::class, 'index'])->name('customer.bookings.index');
     Route::post('/bookings', [CustomerBookingController::class, 'store'])->name('customer.bookings.store');
@@ -74,14 +77,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('/seats', SeatController::class)->only(['index', 'update']);
     Route::post('/seats/book', [SeatController::class, 'book'])->name('seats.book');
-    Route::get('/seats/search', [SeatController::class, 'search'])->name('seat.search');
-    Route::get('/seats/searchbyshowtime', [SeatController::class, 'searchbyshowtime'])->name('seat.searchbyshowtime');  //search button
+    Route::get('/seats/search', [SeatController::class, 'search'])->name('seat.search'); //search button
     Route::get('/seats/create', [SeatController::class, 'create'])->name('seat.create');
     Route::post('/seats/store', [SeatController::class, 'store'])->name('seat.store');    
     Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
     Route::post('/seats/edit', [SeatController::class, 'storeedit'])->name('seat.storeedit');
     Route::delete('/seats/{seat}', [SeatController::class, 'delete'])->name('seat.delete');
-    Route::get('/seats/generate/{id}', [SeatController::class, 'generateSeats'])->name('seat.generate'); //search button
+    Route::get('/seats/generate/{id}', [SeatController::class, 'generateSeats'])->name('seat.generate'); 
     
     Route::resource('/customers', CustomerController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
