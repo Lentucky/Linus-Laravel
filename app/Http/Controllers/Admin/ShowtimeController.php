@@ -23,7 +23,7 @@ class ShowtimeController extends Controller
             //dd($request->start_time);
             $validated = $request->validate([
                 'movie_id' => 'required|exists:movies,id',
-                'screening_date'=> 'required|date', 
+                'screening_date'=> 'required|date|after_or_equal:today', 
                 'start_time' => 'required|date_format:H:i'
 
             ]);

@@ -21,6 +21,8 @@
             <option value="0"{{ $seat->is_booked == false ? 'selected' : ''}}>False</option>
             <option value="1"{{ $seat->is_booked == true ? 'selected' : ''}}>True</option>
         </select><br>
+        <input type="hidden" name="search" value="{{ $search }}">
+        <input type="hidden" name="page" value="{{ $page }}">
         <button type="submit">Save</button> 
     </form>
     <form action="{{ route('seat.delete', $seat->id) }}" method="POST">

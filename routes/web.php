@@ -69,12 +69,14 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('/seats', SeatController::class)->only(['index', 'update']);
     Route::post('/seats/book', [SeatController::class, 'book'])->name('seats.book');
-    Route::get('/seats/search', [SeatController::class, 'search'])->name('seat.search'); //search button
+    Route::get('/seats/search', [SeatController::class, 'search'])->name('seat.search');
+    Route::get('/seats/searchbyshowtime', [SeatController::class, 'searchbyshowtime'])->name('seat.searchbyshowtime');  //search button
     Route::get('/seats/create', [SeatController::class, 'create'])->name('seat.create');
     Route::post('/seats/store', [SeatController::class, 'store'])->name('seat.store');    
     Route::get('/seats/edit/{id}', [SeatController::class, 'edit'])->name('seat.edit');
     Route::post('/seats/edit', [SeatController::class, 'storeedit'])->name('seat.storeedit');
     Route::delete('/seats/{seat}', [SeatController::class, 'delete'])->name('seat.delete');
+    Route::get('/seats/generate/{id}', [SeatController::class, 'generateSeats'])->name('seat.generate'); //search button
     
     Route::resource('/customers', CustomerController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
