@@ -15,7 +15,7 @@
                         <th style="width: 200px;">Screening Date</th>
                         <th>Showtime Start Time</th>
                         <th>Seat Number</th>
-                        <th>Booked Status</th> <!-- check means booked -->
+                        <th>Booked Status</th> 
                 
                         
                     </tr>
