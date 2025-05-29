@@ -15,6 +15,7 @@ class DashboardController extends Controller
         $movies = Movie::all();
         $showtimes = Showtime::all();
         $currentshowing = Showtime::whereDate('screening_date', Carbon::today())->get();
+        //dd(Carbon::today());
         $upcomingshowing = Showtime::where('screening_date', '>', Carbon::today())->get();
         $pastshowing = Showtime::where('screening_date', '<', Carbon::today())->orderBy('movie_id', 'ASC')->paginate(3);
 

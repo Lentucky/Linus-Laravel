@@ -61,4 +61,51 @@ class BookingController extends Controller
 
         return view('customer.history', compact('bookings'));
     }
+
+        public function selectShowtime($movieId)
+    {
+        $movie = \App\Models\Movie::findOrFail($movieId);
+        $showtimes = \App\Models\Showtime::where('movie_id', $movieId)->orderBy('screening_date')->get();
+
+        return view('customer.booking.select-showtime', compact('movie', 'showtimes'));
+    }
+
+    public function selectSeat($showtimeId)
+    {
+        $showtime = \App\Models\Showtime::with('movie')->findOrFail($showtimeId);
+        $seats = \App\Models\Seat::where('showtime_id', $showtimeId)->get();
+
+        return view('customer.booking.select-seat', compact('showtime', 'seats'));
+    }
+
+    public function confirmBooking(Request $request)
+    {
+        
+        $request->validate([
+            'showtime_id' => 'required|exists:showtimes,id',
+            'seat_id' => 'required|exists:seats,id',
+        ]);
+
+        $seat = \App\Models\Seat::where('id', $request->seat_id)
+            ->where('showtime_id', $request->showtime_id)
+            ->where('is_booked', false)
+            ->first();
+
+            if (!$seat) {
+                return redirect()->back()->withErrors(['seat_id' => 'Seat already booked.']);
+            }
+
+            \App\Models\Booking::create([
+                'user_id' => auth()->id(),
+                'showtime_id' => $request->showtime_id,
+                'seat_id' => $seat->id,
+                'status' => 'confirmed',
+                'booking_code' => strtoupper(Str::random(8)),
+            ]);
+
+        $seat->update(['is_booked' => true]);
+
+        return redirect()->route('customer.bookings.history')->with('success', 'Booking successful!');
+    }
+
 }

@@ -28,7 +28,7 @@
                                 <td style="text-align: center;">{{ $seat->showtime->movie->title}}</td>
                                 <td style="text-align: center;">{{ $seat->showtime->screening_date }}</td>
                                 <td style="text-align: center;">{{$seat->showtime->formatted_start_time ?? 'No Showtime'}}</td>
-                                <td><img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
+                                <td><img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('storage/public/images/seat.png') }}" alt="Uploaded Image">
                                 <div style="
                                     position: relative;
                                     text-align: center;

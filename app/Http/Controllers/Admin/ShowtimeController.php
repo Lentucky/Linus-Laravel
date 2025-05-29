@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Showtime;
 use App\Models\Movie;
+use App\Models\Seat;
 class ShowtimeController extends Controller
 {
     public function index(){
@@ -20,7 +21,7 @@ class ShowtimeController extends Controller
         return view('admin.showtimes.create',['movies' => $movies]);
     }
     public function store(Request $request){
-            //dd($request->start_time);
+            //dd($request->all());
             $validated = $request->validate([
                 'movie_id' => 'required|exists:movies,id',
                 'screening_date'=> 'required|date|after_or_equal:today', 
@@ -29,7 +30,19 @@ class ShowtimeController extends Controller
             ]);
 
             //dd($validated);
-            Showtime::create($validated);
+            $test = Showtime::create($validated);
+            // Auto create Seats...
+            $rows = range('A', 'J'); // Letters A to J for rows
+            $columns = range(1, 10); // Numbers 1 to 10 for columns
+                foreach ($rows as $row) {
+                    foreach ($columns as $col) {
+                        Seat::create([
+                            'showtime_id' => $test->id,
+                            'seat_number' => $row . $col,
+                            'is_booked' => false,
+                        ]);
+                    }
+                }            
             return redirect()->route('showtimes.index')->with('success',  "Showtime succesfully added");    //remove with if not gonna use     
         }     
     public function edit($id)
