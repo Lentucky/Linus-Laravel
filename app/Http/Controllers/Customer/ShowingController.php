@@ -13,10 +13,12 @@ class ShowingController extends Controller
     public function index()
     {
         $movies = Movie::whereHas('showtimes', function ($query) {
-            $query->whereDate('showtimes.screening_date', Carbon::today()); // Change `date` to your actual column
-        })
-        ->get();
-        //dd($movies);
+            $query->whereBetween('showtimes.screening_date', [
+                Carbon::today(),
+                Carbon::today()->addWeeks(4)
+            ]);
+        })->get();
+
         return view('customer.showing', compact('movies'));
     }
 }

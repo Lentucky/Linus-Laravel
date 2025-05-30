@@ -11,10 +11,9 @@ class UpcomingController extends Controller
     public function index()
     {
         $movies = Movie::whereHas('showtimes', function ($query) {
-            $query->where('showtimes.screening_date', '>', Carbon::today()); // Change `date` to your actual column
-        })
-        ->get();
-        //dd($movies);
-        return view('customer.showing', compact('movies'));
+            $query->where('showtimes.screening_date', '>', Carbon::today()->addWeeks(4));
+        })->get();
+
+        return view('customer.upcoming', compact('movies'));
     }
 }

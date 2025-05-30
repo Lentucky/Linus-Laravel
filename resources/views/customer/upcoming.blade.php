@@ -15,16 +15,6 @@
                     <p class="text-sm text-gray-500">{{ $movie->genre->name ?? 'No genre' }}</p>
                     <p class="text-sm mt-1 text-gray-600">{{ Str::limit($movie->description, 80) }}</p>
                     <p class="text-xs text-gray-400 mt-2">Duration: {{ $movie->duration }} mins</p>
-
-                    @auth
-                        <a href="{{ route('customer.bookings.selectShowtime', $movie->id) }}" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
-                            Book Now
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}" class="inline-block mt-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500">
-                            Login to Book
-                        </a>
-                    @endauth
                 </div>
             </div>
         @endforeach
