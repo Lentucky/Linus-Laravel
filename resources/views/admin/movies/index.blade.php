@@ -20,6 +20,14 @@
         <h1>Show Movies here</h1>
         <a href="{{ route('movies.create') }}"><button>Create Movie</button></a>
         
+        <form method="GET" action="{{ route('movies.index') }}" class="mb-4 max-w-xs">
+            <select name="filter" onchange="this.form.submit()" class="w-full border p-2 rounded">
+                <option value="">-- Filter Movies --</option>
+                <option value="showing" {{ request('filter') === 'showing' ? 'selected' : '' }}>Now Showing</option>
+                <option value="upcoming" {{ request('filter') === 'upcoming' ? 'selected' : '' }}>Upcoming</option>
+                <option value="expired" {{ request('filter') === 'expired' ? 'selected' : '' }}>Expired</option>
+            </select>
+        </form>
         <table>
             <thead>
                 <tr>
