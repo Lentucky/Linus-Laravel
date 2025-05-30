@@ -4,15 +4,40 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Genre;
 class MovieController extends Controller
 {
-    public function index(){
-        $movies = Movie::with('genre')->orderBy('created_at', 'DESC')->paginate(10);
-        return view('admin.movies.index',[ 'movies' => $movies]);        
+    public function index(Request $request)
+    {
+        $filter = $request->input('filter'); 
+        $today = Carbon::today(); //movies today
+        $fourWeeksLater = Carbon::today()->copy()->addWeeks(4); //movies 4 weeks latur
+
+        $movies = Movie::with('genre') //when chose showing now
+            ->when($filter === 'showing', function ($query) use ($today, $fourWeeksLater) {
+                $query->whereHas('showtimes', function ($q) use ($today, $fourWeeksLater) {
+                    $q->whereBetween('screening_date', [$today, $fourWeeksLater]);
+                });
+            })//if upcoming is chosen show 4 weeks later
+            ->when($filter === 'upcoming', function ($query) use ($fourWeeksLater) {
+                $query->whereHas('showtimes', function ($q) use ($fourWeeksLater) {
+                    $q->where('screening_date', '>', $fourWeeksLater);
+                });
+            })//show movies yersterday
+            ->when($filter === 'expired', function ($query) use ($today) {
+                $query->whereDoesntHave('showtimes', function ($q) use ($today) {
+                    $q->where('screening_date', '>=', $today);
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('admin.movies.index', compact('movies', 'filter'));
     }
+
     public function create(){
         $genres = Genre::all();
 

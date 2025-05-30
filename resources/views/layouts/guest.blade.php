@@ -3,8 +3,8 @@
         <div class="text-xl font-bold">Cinema</div>
         <ul class="flex space-x-6 text-sm">
             <li><a href="{{ route('home') }}" class="hover:text-yellow-400">Home</a></li>
-            <li><a href="{{ route('guest.movies') }}" class="hover:text-yellow-400">Movies</a></li>
-            <li><a href="{{ route('guest.movies') }}" class="hover:text-yellow-400">Upcoming</a></li>
+            <li><a href="{{ route('guest.showing') }}" class="hover:text-yellow-400">Showing</a></li>
+            <li><a href="{{ route('guest.upcoming') }}" class="hover:text-yellow-400">Upcoming</a></li>
             <li><a href="{{ route('login') }}" class="hover:text-yellow-400">Login</a></li>
             <li><a href="{{ route('register') }}" class="hover:text-yellow-400">Register</a></li>
         </ul>

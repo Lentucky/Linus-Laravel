@@ -27,8 +27,10 @@ Route::get('/welcome', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Guest Routes
-Route::view('/guest/movies', 'guest.movies')->name('guest.movies');
-Route::view('/guest/showtimes', 'guest.showtimes')->name('guest.showtimes');
+Route::prefix('guest')->group(function () {
+    Route::get('/showing', [App\Http\Controllers\Guest\ShowingController::class, 'index'])->name('guest.showing');
+    Route::get('/upcoming', [App\Http\Controllers\Guest\UpcomingController::class, 'index'])->name('guest.upcoming');
+});
 
 // Authentication
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
