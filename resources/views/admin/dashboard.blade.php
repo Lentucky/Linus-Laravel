@@ -3,163 +3,59 @@
 @section('title', 'Welcome')
 
 @section('content')
-    <h1>Admin</h1>
-    <!DOCTYPE html>
-<html>
-<head>
-    <title>Cinema Booking Dashboard</title>
-    <style>
-        .seat { 
-            display: inline-block; 
-            width: 30px; height: 30px; 
-            margin: 3px; 
-            text-align: center; 
-            line-height: 30px; 
-            border: 1px solid #333; 
-            cursor: pointer;
-        }
-        .booked { background-color: #f44336; color: white; cursor: not-allowed; }
-        .available { background-color: #4CAF50; color: white; }
-        .seat-label {
-            cursor: pointer;
-            user-select: none;
-            margin: 3px;
-            padding: 5px 10px;
-            border: 1px solid #333;
-            display: inline-block;
-            border-radius: 4px;
-        }
+<div class="max-w-6xl mx-auto py-6 px-4">
+    <h1 class="text-2xl font-bold mb-4">Now Showing</h1>
 
-        .seat-label.booked {
-            background-color: #f44336;
-            color: white;
-            cursor: not-allowed;
-        }
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach ($currentshowing as $movie)
+            <div class="bg-white shadow rounded overflow-hidden">
+                <img src="{{ asset('uploads/' . basename($movie->poster_url)) }}" alt="{{ $movie->title }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold">{{ $movie->title }}</h2>
+                    <p class="text-sm text-gray-500">{{ $movie->genre->name ?? 'No genre' }}</p>
+                    <p class="text-sm mt-1 text-gray-600">{{ Str::limit($movie->description, 80) }}</p>
+                    <p class="text-xs text-gray-400 mt-2">Duration: {{ $movie->duration }} mins</p>
 
-        .seat-label.available {
-            background-color: #4CAF50;
-            color: white;
-        }
+                    @auth
+                        <a href="{{ route('admin.dashboard.selectShowtime', $movie->id) }}" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+                            View Seats
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="inline-block mt-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500">
+                            Login to Book
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+<div class="max-w-6xl mx-auto py-6 px-4">
+    <h1 class="text-2xl font-bold mb-4">Upcoming</h1>
 
-        .seat-label.selected {
-            outline: 3px solid #ffeb3b;
-            background-color: #ffc107;
-            color: black;
-        }
-    </style>
-</head>
-<body>
-    <main>
-        <h1>Cinema Booking Dashboard</h1>
-        @if(session('error'))
-            <p style="color:red">{{ session('error') }}</p>
-        @endif
-        @if(session('success'))
-            <p style="color:green">{{ session('success') }}</p>
-        @endif
-        <h1 style="text-align: center;">Todays Showing</h1>
-            @foreach($currentshowing as $showtime)
-                    <h1>{{ $showtime->movie->title }}</h1>
-                    <h1>{{ $showtime->screening_date }}</h1>
-                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
-                    <form method="POST" action="">
-                        @csrf
-                        <div>
-                            @foreach($seats as $seat)
-                                @if($seat->showtime_id == $showtime->id)
-                                    <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
-                                        <input
-                                            type="radio"
-                                            name="seat_id"
-                                            value="{{ $seat->id }}"
-                                            {{ $seat->is_booked ? 'disabled' : '' }}
-                                            class="seat-input"
-                                            style="display:none"
-                                        >
-                                        <span>{{ $seat->seat_number }}</span>
-                                    </label>
-                                @endif
-                            @endforeach
-                        </div>
-                        <!--<button type="submit">Book Selected Seat</button>-->
-                    </form>
-               
-            @endforeach
-            <h1 style="text-align: center;">Upcoming Showing</h1>
-            @foreach($upcomingshowing as $showtime)
-                    <h1>{{ $showtime->movie->title }}</h1>
-                    <h1>{{ $showtime->screening_date }}</h1>
-                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
-                    <form method="POST" action="">
-                        @csrf
-                        <div>
-                            @foreach($seats as $seat)
-                                @if($seat->showtime_id == $showtime->id)
-                                    <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
-                                        <input
-                                            type="radio"
-                                            name="seat_id"
-                                            value="{{ $seat->id }}"
-                                            {{ $seat->is_booked ? 'disabled' : '' }}
-                                            class="seat-input"
-                                            style="display:none"
-                                        >
-                                        <span>{{ $seat->seat_number }}</span>
-                                    </label>
-                                @endif
-                            @endforeach
-                        </div>
-       
-                    </form>
-               
-            @endforeach
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach ($upcomingshowing as $movie)
+            <div class="bg-white shadow rounded overflow-hidden">
+                <img src="{{ asset('uploads/' . basename($movie->poster_url)) }}" alt="{{ $movie->title }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold">{{ $movie->title }}</h2>
+                    <p class="text-sm text-gray-500">{{ $movie->genre->name ?? 'No genre' }}</p>
+                    <p class="text-sm mt-1 text-gray-600">{{ Str::limit($movie->description, 80) }}</p>
+                    <p class="text-xs text-gray-400 mt-2">Duration: {{ $movie->duration }} mins</p>
 
-            <h1 style="text-align: center;">Past Showing</h1>
-            @foreach($pastshowing as $showtime)
-                    <h1>{{ $showtime->movie->title }}</h1>
-                    <h1>{{ $showtime->screening_date }}</h1>
-                    <h3>Showtime: {{ $showtime->formatted_start_time }}</h3>
-                    <form method="POST" action="">
-                        @csrf
-                        <div>
-                            @foreach($seats as $seat)
-                                @if($seat->showtime_id == $showtime->id)
-                                    <label class="seat-label {{ $seat->is_booked ? 'booked' : 'available' }}">
-                                        <input
-                                            type="radio"
-                                            name="seat_id"
-                                            value="{{ $seat->id }}"
-                                            {{ $seat->is_booked ? 'disabled' : '' }}
-                                            class="seat-input"
-                                            style="display:none"
-                                        >
-                                        <span>{{ $seat->seat_number }}</span>
-                                    </label>
-                                @endif
-                            @endforeach
-                        </div>
-       
-                    </form>
-               
-            @endforeach
-            <div style="text-align:center;">{{ $pastshowing->withQueryString()->links() }}</div>
-    </main>
-
-</body>
-</html>
-<script>
-    document.querySelectorAll('.seat-input').forEach(input => {
-        input.addEventListener('change', function() {
-            // Remove 'selected' class from all seat labels
-            document.querySelectorAll('.seat-label.selected').forEach(label => {
-                label.classList.remove('selected');
-            });
-            
-            // Add 'selected' class to the label of the checked input
-            if (this.checked) {
-                this.closest('label').classList.add('selected');
-            }
-        });
-    });
-</script>
+                    @auth
+                        <a href="{{ route('admin.dashboard.selectShowtime', $movie->id) }}" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+                            View Seats
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="inline-block mt-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500">
+                            Login to Book
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 @endsection
+
