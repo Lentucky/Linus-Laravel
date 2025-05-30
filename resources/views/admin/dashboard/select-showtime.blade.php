@@ -8,7 +8,7 @@
 
     <div class="space-y-3">
         @forelse ($showtimes as $showtime)
-            <a href="{{ route('customer.bookings.selectSeat', $showtime->id) }}"
+            <a href="{{ route('admin.dashboard.selectSeat', $showtime->id) }}"
                class="block p-4 bg-white rounded shadow hover:bg-blue-50">
                 <p class="text-md font-medium">Date: {{ $showtime->screening_date }}</p>
                 <p class="text-sm text-gray-600">Time: {{ $showtime->start_time }}</p>

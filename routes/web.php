@@ -63,6 +63,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/dashboard/select-showtime/{movie}', [DashboardController::class, 'selectShowtime'])->name('admin.dashboard.selectShowtime');
     Route::get('/dashboard/select-seat/{showtime}', [DashboardController::class, 'selectSeat'])->name('admin.dashboard.selectSeat');
+    Route::get('/dashboard/edit-seat/{seat}', [DashboardController::class, 'edit'])->name('admin.dashboard.edit');
     
     Route::resource('/movies', MovieController::class)->only(['index', 'create', 'store', 'edit', 'search']);
     Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');

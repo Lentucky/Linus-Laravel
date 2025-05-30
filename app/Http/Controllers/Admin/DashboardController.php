@@ -26,7 +26,7 @@ class DashboardController extends Controller
         //$pastshowing = Showtime::where('screening_date', '<', Carbon::today())->orderBy('movie_id', 'ASC')->paginate(3);
 
         $seats = Seat::all();
-        return view('admin.dashboard', compact( 'showtimes' , 'currentshowing', 'upcomingshowing', 'seats'));
+        return view('admin.dashboard.dashboard', compact( 'showtimes' , 'currentshowing', 'upcomingshowing', 'seats'));
     }
 
     public function selectShowtime($movieId)
@@ -34,6 +34,17 @@ class DashboardController extends Controller
         $movie = \App\Models\Movie::findOrFail($movieId);
         $showtimes = \App\Models\Showtime::where('movie_id', $movieId)->orderBy('screening_date')->get();
 
-        return view('admin.select-showtime', compact('movie', 'showtimes'));
+        return view('admin.dashboard.select-showtime', compact('movie', 'showtimes'));
+    }
+    public function selectSeat($showtimeId)
+    {
+        $showtime = \App\Models\Showtime::with('movie')->findOrFail($showtimeId);
+        $seats = \App\Models\Seat::where('showtime_id', $showtimeId)->get();
+
+        return view('admin.dashboard.select-seat', compact('showtime', 'seats'));
+    }
+    public function edit(Seat $seat)
+    {
+        return view('admin.dashboard.edit', compact('seat'));
     }
 }
