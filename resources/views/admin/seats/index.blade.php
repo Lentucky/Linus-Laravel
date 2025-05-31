@@ -26,21 +26,26 @@
             @endphp
 
             <p style="text-align: center;">Movie Title: {{ $movie->title ?? "No Movie Title" }}</p>
-                <form method="GET" style="text-align:center;" id="filterForm" action="{{ route('seat.search') }}" >
-                    <label for="showtime_id">Screening Date:</label>
-                    <select name="showtime_id" id="showtime_id">
+            <form method="GET" action="{{ route('seat.search') }}" class="flex flex-col items-center gap-4 p-4 bg-white shadow-md rounded-lg w-full max-w-md mx-auto">
+                <div class="w-full text-left">
+                    <label for="showtime_id" class="block text-sm font-medium text-gray-700 mb-1">🎬 Screening Date:</label>
+                    <select name="showtime_id" id="showtime_id" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
                         <option value="">-- Please Select a Screening Date --</option>
                         @foreach($selectedshowtimes as $showtime)
                             <option value="{{ $showtime->id }}" {{ request('showtime_id') == $showtime->id ? 'selected' : '' }}>
-                                Date: {{ $showtime->screening_date }} 
+                                Date: {{ $showtime->screening_date }}
                             </option>
                         @endforeach
                     </select>
-                    <input type="hidden" name="page" value="{{ $page }}"> <!--To be removed -->
-                    <input type="hidden" name="movie_id" value="{{ $movie_id ?? 'null' }}">
+                </div>
 
-                    <button type="submit">Search</button>
-                </form>
+                <input type="hidden" name="page" value="{{ $page }}">
+                <input type="hidden" name="movie_id" value="{{ $movie_id ?? 'null' }}">
+
+                <button type="submit" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    🔍 Search
+                </button>
+            </form>
 
             @if($showtimestoshow)
                 @foreach( $showtimestoshow as $showtime)
@@ -76,7 +81,8 @@
                     <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>   
                 @endforeach
             @else
-            <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
+            @foreach( $selectedshowtimes as $showtime)
+                    <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
                     <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
 
                     <p style="text-align: center;">SCREEN</P>
@@ -105,8 +111,8 @@
                             @endif
                         @endforeach
                     </div> 
-                    <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>           
-           
+                    <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>   
+                @endforeach
             @endif
             
     
