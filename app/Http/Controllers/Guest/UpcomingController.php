@@ -1,19 +1,21 @@
 <?php
-namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Movie;
 use Carbon\Carbon;
+
 class UpcomingController extends Controller
 {
+    //
     public function index()
     {
         $movies = Movie::whereHas('showtimes', function ($query) {
-            $query->where('showtimes.screening_date', '>', Carbon::today()->addWeeks(4));
+            $query->where('screening_date', '>', Carbon::today()->addWeeks(4));
         })->get();
 
-        return view('customer.upcoming', compact('movies'));
+        return view('guest.upcoming', compact('movies'));
     }
 }

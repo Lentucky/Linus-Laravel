@@ -1,0 +1,50 @@
+@extends('layouts.app')
+
+@section('title', 'Select Seat')
+
+@section('content')
+<div class="max-w-4xl mx-auto py-6">
+    <h2 class="text-2xl font-semibold text-center mb-6">
+        {{ $showtime->movie->title }} — {{ $showtime->screening_date }} @ {{ $showtime->formatted_start_time ?? $showtime->start_time }}
+    </h2>
+
+    <form method="POST" action="{{ route('customer.bookings.store') }}">
+        @csrf
+        <input type="hidden" name="showtime_id" value="{{ $showtime->id }}">
+
+        @php
+            $groupedSeats = $seats->groupBy(fn($seat) => strtoupper(substr($seat->seat_number, 0, 1)));
+        @endphp
+
+        <div class="space-y-3">
+            @foreach ($groupedSeats as $row => $seatsInRow)
+                <div class="flex items-center justify-center gap-4">
+                    <span class="w-4 text-right font-bold text-sm text-gray-600">{{ $row }}</span>
+                    @foreach ($seatsInRow as $seat)
+                        <label class="relative group w-12 h-12 block">
+                            <a href="{{ route('admin.dashboard.edit', ['seat' => $seat->id, 'search' => request('movie_id'), 'page' => request('page', 1)]) }}">
+                            <img
+                                src="{{ asset('storage/images/seat.png') }}"
+                                alt="{{ $seat->seat_number }}"
+                                class="w-full h-full object-contain 
+                                    {{ $seat->is_booked ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-80' }}"
+                            >
+
+
+
+
+                            <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-xs drop-shadow">
+                                {{ $seat->seat_number }}
+                            </span>
+                        </a>
+                        </label>
+
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+
+
+    </form>
+</div>
+@endsection

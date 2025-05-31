@@ -27,8 +27,10 @@ Route::get('/welcome', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Guest Routes
-Route::view('/guest/movies', 'guest.movies')->name('guest.movies');
-Route::view('/guest/showtimes', 'guest.showtimes')->name('guest.showtimes');
+Route::prefix('guest')->group(function () {
+    Route::get('/showing', [App\Http\Controllers\Guest\ShowingController::class, 'index'])->name('guest.showing');
+    Route::get('/upcoming', [App\Http\Controllers\Guest\UpcomingController::class, 'index'])->name('guest.upcoming');
+});
 
 // Authentication
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -61,7 +63,9 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-
+    Route::get('/dashboard/select-showtime/{movie}', [DashboardController::class, 'selectShowtime'])->name('admin.dashboard.selectShowtime');
+    Route::get('/dashboard/select-seat/{showtime}', [DashboardController::class, 'selectSeat'])->name('admin.dashboard.selectSeat');
+    Route::get('/dashboard/edit-seat/{seat}', [DashboardController::class, 'edit'])->name('admin.dashboard.edit');
     
     Route::resource('/movies', MovieController::class)->only(['index', 'create', 'store', 'edit', 'search']);
     Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');
