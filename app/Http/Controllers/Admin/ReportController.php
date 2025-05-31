@@ -11,7 +11,12 @@ class ReportController extends Controller
     public function index(){
        
         $bookings = Booking::whereDate('created_at', Carbon::today())->get();
-        return view('admin.reports.index', compact('bookings'));
+        $lastweekbookings = Booking::whereBetween('created_at', [
+        Carbon::today()->subWeek()->startOfWeek(), // Last week's Monday
+        Carbon::today(),                       
+    ])->get();
+        //dd($lastweekbookings);
+        return view('admin.reports.index', compact('bookings', 'lastweekbookings'));
     }
 
     public function search(Request $request)
