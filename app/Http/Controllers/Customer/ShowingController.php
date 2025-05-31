@@ -14,7 +14,7 @@ class ShowingController extends Controller
     {
         $movies = Movie::whereHas('showtimes', function ($query) {
             $query->whereBetween('showtimes.screening_date', [
-                Carbon::today(),
+                Carbon::yesterday(), // Changed to carbon yesterday to accomodate current date showtimes
                 Carbon::today()->addWeeks(4)
             ]);
         })->get();

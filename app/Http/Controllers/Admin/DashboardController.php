@@ -15,7 +15,7 @@ class DashboardController extends Controller
         //$movies = Movie::all();
         $showtimes = Showtime::all();
         $currentshowing = Movie::whereHas('showtimes', function ($query) {
-            $query->whereBetween('screening_date', [Carbon::today(), Carbon::today()->addWeeks(4)]);
+            $query->whereBetween('screening_date', [Carbon::yesterday(), Carbon::today()->addWeeks(4)]); // Changed to carbon yesterday to accomodate current date showtimes
         })->get();
         //dd(Carbon::today());
 

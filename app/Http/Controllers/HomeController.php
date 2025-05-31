@@ -14,7 +14,7 @@ class HomeController extends Controller
         $today = Carbon::today();
 
         $showingMovies = Movie::whereHas('showtimes', function ($query) use ($today) {
-            $query->whereBetween('screening_date', [$today, $today->copy()->addWeeks(4)]);
+            $query->whereBetween('screening_date', [Carbon::yesterday(), Carbon::today()->addWeeks(4)]); //Changed to yesterday.
         })->with('genre')->get();
 
         $upcomingMovies = Movie::whereHas('showtimes', function ($query) use ($today) {
