@@ -18,7 +18,7 @@
           Search
       </button>
   </form>
-<h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Todays Booking</h2>
+<h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Recent Bookings</h2>
 <div class="overflow-x-auto">
   <table class="min-w-full border border-gray-300 divide-y divide-gray-200">
     <thead class="bg-gray-100">
@@ -35,7 +35,7 @@
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
-        @foreach($bookings as $booking)
+        @foreach($recentbookings as $booking)
       <tr class="hover:bg-gray-50">
         <td class="px-6 py-4 text-sm text-gray-800">{{$booking->id}}</td>
         <td class="px-6 py-4 text-sm text-gray-800">{{ $booking->user->name }}</td>
