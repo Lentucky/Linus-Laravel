@@ -47,4 +47,18 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard.edit', compact('seat'));
     }
+    public function storeedit(Request $request){
+        //dd($request->all());
+        $validated = $request->validate([
+            'seat_number'=> 'required|string',  //changed to string to accomdate A1,B5,C6.
+            'is_booked' => 'required|boolean'
+
+        ]);
+        //dd($validated);
+
+        Seat::where('id', $request->id)->update($validated);
+
+        return redirect()->route('admin.dashboard.selectSeat', $request->showtime_id)->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
+
+    }
 }
