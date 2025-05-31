@@ -11,7 +11,7 @@ class ShowtimeController extends Controller
 {
     public function index(){
         //$showtimes = Showtime::with('movie')->orderBy('created_at', 'DESC')->paginate(10);
-        $showtimes = Showtime::with('movie')->orderBy('created_at', 'DESC')->get();
+        $showtimes = Showtime::with('movie')->orderBy('created_at', 'DESC')->paginate(10);;
         return view('admin.showtimes.index',[ 'showtimes' => $showtimes]);
     }
     public function create(){
@@ -78,5 +78,17 @@ class ShowtimeController extends Controller
     }
    
 
+    public function search(Request $request)
+        {
+            $query = $request->input('search');
+
+        
+            $showtimes = Showtime::when($query, function ($q) use ($query) { 
+                $q->orWhereHas('movie', function ($q) use ($query) {
+                    $q->where('title', 'LIKE', "%{$query}%");
+                });
+            })->orderBy('created_at', 'DESC')->paginate(20);
+            return view('admin.showtimes.index', compact('showtimes', 'query'));
+        } 
     
 }

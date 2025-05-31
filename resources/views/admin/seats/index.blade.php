@@ -25,10 +25,10 @@
                 $selectedshowtimes = $showtimes->where('movie_id', $movie->id);
             @endphp
 
-            <p style="text-align: center;">Movie Title: {{ $movie->title ?? "No Movie Title" }}</p>
+            <h1 style="text-align: center;">Movie Title: {{ $movie->title ?? "No Movie Title" }}</h1>
             <form method="GET" action="{{ route('seat.search') }}" class="flex flex-col items-center gap-4 p-4 bg-white shadow-md rounded-lg w-full max-w-md mx-auto">
                 <div class="w-full text-left">
-                    <label for="showtime_id" class="block text-sm font-medium text-gray-700 mb-1">🎬 Screening Date:</label>
+                    <label for="showtime_id" class="block text-sm font-medium text-gray-700 mb-1">🎬 Search by Screening Date:</label>
                     <select name="showtime_id" id="showtime_id" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
                         <option value="">-- Please Select a Screening Date --</option>
                         @foreach($selectedshowtimes as $showtime)
@@ -49,13 +49,14 @@
 
             @if($showtimestoshow)
                 @foreach( $showtimestoshow as $showtime)
+                    <p style="text-align: center;">{{ $showtime->movie->title ?? "No Movie Title" }}</p>
                     <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
                     <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
 
                     <p style="text-align: center;">SCREEN</P>
                     <div style="margin: auto; width: 1400px; display: flex; flex-wrap: wrap;">
                         @foreach($seats->where('showtime_id', $showtime->id) as $seat)
-                            @if($seat->showtime_id == $showtime->id) 
+
                                 <div class="{{ $seat->is_booked ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-80' }}" ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => request('movie_id'), 'page' => request('page', 1)]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
                                                         <div style="
                                                             position: relative;
@@ -75,20 +76,21 @@
                                 
                                     </a>
                                 </div>
-                            @endif
+
                         @endforeach
                     </div> 
                     <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>   
                 @endforeach
             @else
             @foreach( $selectedshowtimes as $showtime)
+                    <p style="text-align: center;">{{ $showtime->movie->title ?? "No Movie Title" }}</p>
                     <p style="text-align: center;">Screening Date: {{ $showtime->screening_date }}</p>
                     <p style="text-align: center;">Start Time: {{ $showtime->formatted_start_time }}</p>
 
                     <p style="text-align: center;">SCREEN</P>
                     <div style="margin: auto; width: 1400px; display: flex; flex-wrap: wrap;">
                         @foreach($seats->where('showtime_id', $showtime->id) as $seat)
-                            @if($seat->showtime_id == $showtime->id) 
+
                                 <div class="{{ $seat->is_booked ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-80' }}" ><a href="{{ route('seat.edit', ['id' => $seat->id, 'search' => request('movie_id'), 'page' => request('page', 1)]) }}"><img style="width: 70px; height: 70px; object-fit: fit;" src="{{ asset('storage/images/seat.png') }}" alt="Uploaded Image">
                                                         <div style="
                                                             position: relative;
@@ -108,7 +110,7 @@
                                 
                                     </a>
                                 </div>
-                            @endif
+
                         @endforeach
                     </div> 
                     <a href="{{ route('seat.generate', $showtime->id) }}"><button onclick="return confirmDelete();">Generate Seats</button></a>   

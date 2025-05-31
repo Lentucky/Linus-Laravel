@@ -77,6 +77,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 
     Route::resource('/showtimes', ShowtimeController::class)->only(['index', 'create', 'store', 'edit']);
+    Route::get('/showtimes/search', [ShowtimeController::class, 'search'])->name('showtimes.search'); //search button
     Route::put('/showtimes/{id}/edit', [ShowtimeController::class, 'storeedit'])->name('showtimes.storeedit');
     Route::delete('/showtimes/{showtime}', [ShowtimeController::class, 'delete'])->name('showtimes.delete');
 
