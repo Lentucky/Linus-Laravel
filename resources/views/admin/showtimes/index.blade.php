@@ -4,7 +4,7 @@
 
 @section('content')
     <form method="GET" action="{{ route('showtimes.search') }}">
-        <input type="text" name="search" value="" placeholder="Search showtime, seats...">
+        <input type="text" name="search" value="" placeholder="Search movie title...">
         <button type="submit">Search</button>
     </form>
     <div class="mas-w-6xl mx-auto p-4">
