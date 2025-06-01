@@ -3,8 +3,8 @@
 @section('title', 'Showtimes')
 
 @section('content')
-    <form method="GET" action="">
-        <input type="text" name="search" value="" placeholder="Search showtime, seats...">
+    <form method="GET" action="{{ route('showtimes.search') }}">
+        <input type="text" name="search" value="" placeholder="Search movie title...">
         <button type="submit">Search</button>
     </form>
     <div class="mas-w-6xl mx-auto p-4">
@@ -22,10 +22,10 @@
             <tbody>
                 @foreach($showtimes as $showtime)
                     <tr class="border-t">
-                        <td class="p-2">{{$showtime->id}}</td>
+                        <td style="text-align: center;" class="p-2">{{$showtime->id}}</td>
                         <td style="text-align: center;" class="p-2">{{$showtime->movie->title ?? 'No Movie'}}</td>
-                        <td class="p-2">{{$showtime->screening_date}}</td>
-                        <td class="p-2">{{$showtime->formatted_start_time}}</td>
+                        <td style="text-align: center;" class="p-2">{{$showtime->screening_date}}</td>
+                        <td style="text-align: center;" class="p-2">{{$showtime->formatted_start_time}}</td>
         
                         <td><a href="{{ route('showtimes.edit', $showtime->id) }}"> <button class="text-blue-600 hover:underline">Edit</button></a></td>
                     </tr>

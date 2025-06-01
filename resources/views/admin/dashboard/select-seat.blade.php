@@ -22,7 +22,7 @@
                     <span class="w-4 text-right font-bold text-sm text-gray-600">{{ $row }}</span>
                     @foreach ($seatsInRow as $seat)
                         <label class="relative group w-12 h-12 block">
-                            <a href="{{ route('admin.dashboard.edit', ['seat' => $seat->id, 'search' => request('movie_id'), 'page' => request('page', 1)]) }}">
+                            <a href="{{ route('admin.dashboard.edit', ['seat' => $seat->id]) }}">
                             <img
                                 src="{{ asset('storage/images/seat.png') }}"
                                 alt="{{ $seat->seat_number }}"

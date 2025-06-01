@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form action="" method="POST" class="space-y-6">
+    <form action="{{ route('admin.dashboard.storeedit', $seat->id) }}" method="POST" class="space-y-6">
         @csrf
         @method('PUT')
 
@@ -37,11 +37,11 @@
 
         <!-- Showtime ID -->
         <div>
-            <label for="showtime_id" class="block text-sm font-medium text-gray-700">Showtime ID</label>
-            <input type="number" name="showtime_id" id="showtime_id"
+
+            <input type="hidden" name="showtime_id" id="showtime_id"
                    value="{{ old('showtime_id', $seat->showtime_id) }}"
-                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                   required>
+                   
+                   >
         </div>
 
         <!-- Submit Button -->

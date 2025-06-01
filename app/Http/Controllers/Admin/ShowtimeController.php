@@ -78,5 +78,17 @@ class ShowtimeController extends Controller
     }
    
 
+    public function search(Request $request)
+        {
+            $query = $request->input('search');
+
+        
+            $showtimes = Showtime::when($query, function ($q) use ($query) { 
+                $q->orWhereHas('movie', function ($q) use ($query) {
+                    $q->where('title', 'LIKE', "%{$query}%");
+                });
+            })->orderBy('created_at', 'DESC')->get();
+            return view('admin.showtimes.index', compact('showtimes', 'query'));
+        } 
     
 }

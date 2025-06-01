@@ -66,6 +66,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/select-showtime/{movie}', [DashboardController::class, 'selectShowtime'])->name('admin.dashboard.selectShowtime');
     Route::get('/dashboard/select-seat/{showtime}', [DashboardController::class, 'selectSeat'])->name('admin.dashboard.selectSeat');
     Route::get('/dashboard/edit-seat/{seat}', [DashboardController::class, 'edit'])->name('admin.dashboard.edit');
+    Route::put('/dashboard/edit/{id}', [DashboardController::class, 'storeedit'])->name('admin.dashboard.storeedit');
     
     Route::resource('/movies', MovieController::class)->only(['index', 'create', 'store', 'edit', 'search']);
     Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');
@@ -76,6 +77,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 
     Route::resource('/showtimes', ShowtimeController::class)->only(['index', 'create', 'store', 'edit']);
+    Route::get('/showtimes/search', [ShowtimeController::class, 'search'])->name('showtimes.search'); //search button
     Route::put('/showtimes/{id}/edit', [ShowtimeController::class, 'storeedit'])->name('showtimes.storeedit');
     Route::delete('/showtimes/{showtime}', [ShowtimeController::class, 'delete'])->name('showtimes.delete');
 
@@ -97,4 +99,5 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.delete');
 
     Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('/reports/search', [ReportController::class, 'search'])->name('reports.search');
 });

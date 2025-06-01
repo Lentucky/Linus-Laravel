@@ -9,7 +9,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             @foreach ($movies as $movie)
                 <div class="bg-white rounded shadow p-4">
-                    <img src="{{ asset('storage/' . $movie->poster_url) }}" class="w-full h-64 object-cover rounded mb-4" alt="{{ $movie->title }}">
+                    <img src="{{ asset('uploads/' . basename($movie->poster_url)) }}" class="w-full h-64 object-cover rounded mb-4" alt="{{ $movie->title }}">
                     <h2 class="text-lg font-bold">{{ $movie->title }}</h2>
                     <p class="text-sm text-gray-600 mb-3">{{ Str::limit($movie->description, 100) }}</p>
 

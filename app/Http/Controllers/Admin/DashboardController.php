@@ -15,7 +15,7 @@ class DashboardController extends Controller
         //$movies = Movie::all();
         $showtimes = Showtime::all();
         $currentshowing = Movie::whereHas('showtimes', function ($query) {
-            $query->whereBetween('screening_date', [Carbon::today(), Carbon::today()->addWeeks(4)]);
+            $query->whereBetween('screening_date', [Carbon::yesterday(), Carbon::today()->addWeeks(4)]); // Changed to carbon yesterday to accomodate current date showtimes
         })->get();
         //dd(Carbon::today());
 
@@ -46,5 +46,19 @@ class DashboardController extends Controller
     public function edit(Seat $seat)
     {
         return view('admin.dashboard.edit', compact('seat'));
+    }
+    public function storeedit(Request $request){
+        //dd($request->all());
+        $validated = $request->validate([
+            'seat_number'=> 'required|string',  //changed to string to accomdate A1,B5,C6.
+            'is_booked' => 'required|boolean'
+
+        ]);
+        //dd($validated);
+
+        Seat::where('id', $request->id)->update($validated);
+
+        return redirect()->route('admin.dashboard.selectSeat', $request->showtime_id)->with('success',  "Seat succesfully updated");   //remove with if not gonna use         
+
     }
 }
