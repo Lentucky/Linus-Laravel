@@ -3,35 +3,35 @@
 @section('title', 'Customers')
 
 @section('content')
-    <div class="max-w-4xl mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Customer List</h1>
+<div class="admin-container">
+    <h1 class="admin-title">Customer List</h1>
 
-        <a href="{{ route('customers.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 mb-4 inline-block">+ New Customer</a>
+    <a href="{{ route('customers.create') }}" class="btn-new-customer">+ New Customer</a>
 
-        <table class="w-full bg-white shadow border rounded mt-4 text-sm">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="text-left p-2">Name</th>
-                    <th class="text-left p-2">Email</th>
-                    <th class="text-left p-2">Actions</th>
+    <table class="admin-table">
+        <thead class="admin-table-head">
+            <tr>
+                <th class="admin-table-cell">Name</th>
+                <th class="admin-table-cell">Email</th>
+                <th class="admin-table-cell">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($customers as $customer)
+                <tr class="admin-table-row">
+                    <td class="admin-table-cell">{{ $customer->name }}</td>
+                    <td class="admin-table-cell">{{ $customer->email }}</td>
+                    <td class="admin-table-cell">
+                        <a href="{{ route('customers.edit', $customer->id) }}" class="link-edit">Edit</a>
+                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="inline-block ml-2" onsubmit="return confirm('Delete this customer?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="link-delete">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($customers as $customer)
-                    <tr class="border-t">
-                        <td class="p-2">{{ $customer->name }}</td>
-                        <td class="p-2">{{ $customer->email }}</td>
-                        <td class="p-2">
-                            <a href="{{ route('customers.edit', $customer->id) }}" class="text-blue-600 hover:underline">Edit</a>
-                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="inline-block ml-2" onsubmit="return confirm('Delete this customer?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:underline">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection
