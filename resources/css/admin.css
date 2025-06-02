@@ -38,4 +38,201 @@
         @apply hover:text-red-400;
     }
 
+    .admin-form-wrapper {
+        @apply max-w-lg mx-auto bg-white p-6 shadow rounded mt-6;
+    }
+
+    .admin-form-title {
+        @apply text-xl font-semibold mb-4;
+    }
+
+    .admin-form-label {
+        @apply block font-medium mb-1;
+    }
+
+    .admin-form-input {
+        @apply w-full border px-3 py-2 rounded;
+    }
+
+    .admin-error-text {
+        @apply text-red-500 text-sm;
+    }
+
+    .admin-btn {
+        @apply px-4 py-2 rounded text-white;
+    }
+
+    .btn-blue {
+        @apply bg-blue-600 hover:bg-blue-500;
+    }
+
+    .btn-green {
+        @apply bg-green-600 hover:bg-green-500;
+    }
+
+    .admin-link {
+        @apply ml-2 text-sm text-gray-600 hover:underline;
+    }
+
+    .admin-table {
+        @apply w-full bg-white shadow border rounded mt-4 text-sm;
+    }
+
+    .admin-table-head {
+        @apply bg-gray-100;
+    }
+
+    .admin-table-cell {
+        @apply text-left p-2;
+    }
+
+    .admin-table-row {
+        @apply border-t;
+    }
+
+    .admin-th, .admin-td {
+    @apply p-2 text-center;
+    }
+
+    .admin-tr {
+        @apply border-t;
+    }
+
+    .admin-search-form {
+        @apply max-w-md mx-auto mb-4;
+    }
+
+    .admin-search-input {
+        @apply w-full px-4 py-2 border border-gray-300 rounded;
+    }
+
+    .admin-search-button {
+        @apply mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500;
+    }
+
+    .admin-action-link {
+        @apply text-blue-600 hover:underline;
+    }
+
+    .link-edit {
+        @apply text-blue-600 hover:underline;
+    }
+
+    .link-delete {
+        @apply text-red-600 hover:underline;
+    }
+
+    .btn-new-customer {
+        @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 mb-4 inline-block;
+    }
+
+    .admin-title {
+        @apply text-2xl font-bold mb-4;
+    }
+
+    .admin-container {
+        @apply max-w-4xl mx-auto p-4;
+    }
+
+    /* dashboard thing */
+    .dashboard-wrapper {
+        @apply max-w-6xl mx-auto py-6 px-4;
+    }
+
+    .dashboard-section-title {
+        @apply text-2xl font-bold mb-4;
+    }
+
+    .movie-card {
+        @apply bg-white shadow rounded overflow-hidden;
+    }
+
+    .movie-poster {
+        @apply w-full h-48 object-cover;
+    }
+
+    .movie-info {
+        @apply p-4;
+    }
+
+    .movie-title {
+        @apply text-lg font-semibold;
+    }
+
+    .movie-genre {
+        @apply text-sm text-gray-500;
+    }
+
+    .movie-description {
+        @apply text-sm mt-1 text-gray-600;
+    }
+
+    .movie-duration {
+        @apply text-xs text-gray-400 mt-2;
+    }
+
+    .btn-book {
+        @apply inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500;
+    }
+
+    .btn-login {
+        @apply inline-block mt-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500;
+    }
+
+    .movie-grid {
+        @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+    }
+
+    /* reports thing */
+    .report-form {
+    @apply flex items-center space-x-2 mb-6;
+  }
+
+  .report-input {
+    @apply w-full md:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+
+  .report-button {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition;
+  }
+
+  .report-section-title {
+    @apply text-2xl font-bold text-blue-600 mb-2 text-center;
+  }
+
+  .report-table-wrapper {
+    @apply overflow-x-auto mb-10;
+  }
+
+  .report-table {
+    @apply min-w-full border border-gray-300 divide-y divide-gray-200;
+  }
+
+  .report-thead {
+    @apply bg-gray-100;
+  }
+
+  .report-th {
+    @apply px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase;
+  }
+
+  .report-td {
+    @apply px-6 py-4 text-sm text-gray-800;
+  }
+
+  .report-tr {
+    @apply hover:bg-gray-50;
+  }
+
+  .status-confirmed {
+    @apply text-green-600 font-medium;
+  }
+
+  .status-denied {
+    @apply text-red-600 font-medium;
+  }
+
+  .status-pending {
+    @apply text-yellow-600 font-medium;
+  }
 }
