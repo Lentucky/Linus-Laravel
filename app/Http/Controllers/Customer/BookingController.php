@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Showtime;
 use App\Models\Seat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -58,8 +59,9 @@ class BookingController extends Controller
                            ->where('user_id', Auth::id())
                            ->orderByDesc('created_at')
                            ->get();
-
-        return view('customer.history', compact('bookings'));
+        $user = User::where("id", Auth::id())->get()->first();
+        //dd($user);
+        return view('customer.history', compact('bookings', 'user'));
     }
 
         public function selectShowtime($movieId)
