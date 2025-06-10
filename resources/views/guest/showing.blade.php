@@ -3,21 +3,47 @@
 @section('title', 'Guest Movies')
 
 @section('content')
+<div class="cinema-guest-movies-page">
     <div class="max-w-6xl mx-auto py-6 px-4">
-        <h1 class="text-2xl font-bold mb-6">Now Showing</h1>
+        <!-- Header Section - matching showtime page header -->
+        <div class="cinema-guest-container cinema-guest-screen-glow">
+            <div class="text-center">
+                <h1 class="cinema-guest-title cinema-guest-glow-yellow">🎬 Now Showing</h1>
+                <p class="text-yellow-200 text-sm">Discover amazing movies and book your tickets</p>
+            </div>
+        </div>
 
+        <!-- Movies Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             @foreach ($movies as $movie)
-                <div class="bg-white rounded shadow p-4">
-                    <img src="{{ asset('uploads/' . basename($movie->poster_url)) }}" class="w-full h-64 object-cover rounded mb-4" alt="{{ $movie->title }}">
-                    <h2 class="text-lg font-bold">{{ $movie->title }}</h2>
-                    <p class="text-sm text-gray-600 mb-3">{{ Str::limit($movie->description, 100) }}</p>
+                <div class="cinema-guest-movie-card cinema-guest-film-strip">
+                    <img src="{{ asset('uploads/' . basename($movie->poster_url)) }}" 
+                         class="cinema-guest-poster" 
+                         alt="{{ $movie->title }}">
+                    
+                    <div class="cinema-guest-ticket-effect">
+                        <h2 class="cinema-guest-movie-title">{{ $movie->title }}</h2>
+                        <p class="cinema-guest-description">{{ Str::limit($movie->description, 100) }}</p>
+                    </div>
 
-                    <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 text-sm">
-                        Book Now
+                    <a href="{{ route('login') }}" 
+                       class="cinema-guest-book-button">
+                        🎫 Book Now
                     </a>
                 </div>
             @endforeach
         </div>
+
+        <!-- Empty state - matching showtime empty state -->
+        @if($movies->isEmpty())
+            <div class="text-center py-12">
+                <div class="cinema-no-movies">
+                    <div class="text-6xl mb-4">🎬</div>
+                    <h3 class="text-xl font-semibold text-yellow-400 mb-2">No Movies Available</h3>
+                    <p class="text-gray-300">Check back later for new releases and exciting screenings.</p>
+                </div>
+            </div>
+        @endif
     </div>
+</div>
 @endsection

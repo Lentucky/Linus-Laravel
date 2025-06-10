@@ -13,14 +13,13 @@
         @vite('resources/css/app.css')
     @endauth
 
-
     <!-- ADDED FOR TOASTR LIBRARY  REMOVE IF NOT GONNA USE-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
     @stack('styles')
 </head>
-<body>
+<body class="min-h-screen flex flex-col ">
 
     <header>
         @auth
@@ -36,14 +35,12 @@
         @endauth
     </header>
 
-
-
-    <main class="content">
+    <main class="content flex-grow">
         @yield('content')
     </main>
 
-    <footer class="bg-gray-900 text-gray-300 mt-10">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <footer class="bg-gray-900 text-gray-300 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 py-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <!-- Branding -->
             <div>
                 <h3 class="text-xl font-semibold text-white">🎬 My Cinema</h3>
@@ -61,8 +58,9 @@
                     <li>Location: NU Laguna, Philippines</li>
                 </ul>
             </div>
+        </div>
 
-        <div class="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
+        <div class="border-t border-gray-700 py-3 text-center text-sm text-gray-400">
             &copy; {{ date('Y') }} My Cinema. All rights reserved.
         </div>
     </footer>

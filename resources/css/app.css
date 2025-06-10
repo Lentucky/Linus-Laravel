@@ -13,8 +13,22 @@
 @tailwind utilities;
 
 @layer components {
+    /* Sticky Footer Layout */
+    .sticky-footer-layout {
+        @apply min-h-screen flex flex-col;
+    }
+
+    .main-content {
+        @apply flex-grow;
+    }
+
+    .sticky-footer {
+        @apply mt-auto;
+    }
+
+    /* Enhanced Navbar Styles */
     .navbar {
-        @apply bg-gray-800 text-white px-6 py-3 shadow;
+        @apply bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 py-4 shadow-lg border-b border-gray-700;
     }
 
     .navbar-container {
@@ -22,23 +36,115 @@
     }
 
     .navbar-title {
-        @apply text-xl font-bold;
+        @apply text-2xl font-bold text-yellow-400 tracking-wide;
     }
 
     .navbar-links {
-        @apply flex space-x-6 text-sm;
+        @apply flex space-x-8 text-sm font-medium list-none m-0 p-0;
+    }
+
+    .navbar-links li {
+        @apply list-none;
     }
 
     .navbar-link {
-        @apply hover:text-yellow-400;
+        @apply text-gray-200 hover:text-yellow-400 transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-700/50 no-underline;
     }
 
     .logout-button {
-        @apply hover:text-red-400;
+        @apply text-gray-200 hover:text-red-400 transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-700/50 bg-transparent border-none cursor-pointer font-medium text-sm;
     }
 
-    /* this for the movies */
+    /* Authentication Form Styles */
+    .login-container,
+    .register-container {
+        @apply min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-8;
+    }
 
+    .login-card,
+    .register-card {
+        @apply bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md border border-gray-200;
+    }
+
+    .login-header,
+    .register-header {
+        @apply text-center mb-8;
+    }
+
+    .login-title,
+    .register-title {
+        @apply text-3xl font-bold text-gray-800 mb-2;
+    }
+
+    .login-subtitle,
+    .register-subtitle {
+        @apply text-gray-600 text-sm;
+    }
+
+    .login-form,
+    .register-form {
+        @apply space-y-6;
+    }
+
+    .form-group {
+        @apply space-y-2;
+    }
+
+    .form-label {
+        @apply block text-sm font-semibold text-gray-700;
+    }
+
+    .form-input {
+        @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:shadow-md;
+    }
+
+    .form-input-error {
+        @apply border-red-500 focus:ring-red-400 focus:border-red-400;
+    }
+
+    .form-error {
+        @apply text-red-500 text-xs mt-1 block;
+    }
+
+    .form-options {
+        @apply flex items-center justify-between;
+    }
+
+    .remember-label {
+        @apply flex items-center;
+    }
+
+    .remember-checkbox {
+        @apply w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 focus:ring-2;
+    }
+
+    .remember-text {
+        @apply ml-2 text-sm text-gray-600;
+    }
+
+    .forgot-password-link {
+        @apply text-sm text-yellow-600 hover:text-yellow-700 font-semibold transition-colors duration-200 no-underline hover:underline;
+    }
+
+    .form-actions {
+        @apply pt-4;
+    }
+
+    .login-button,
+    .register-button {
+        @apply w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 shadow-lg;
+    }
+
+    .login-link,
+    .register-link {
+        @apply pt-6 border-t border-gray-200 mt-8;
+    }
+
+    .auth-link {
+        @apply text-yellow-600 hover:text-yellow-700 font-semibold transition-colors duration-200 no-underline hover:underline;
+    }
+
+    /* Movie Components */
     .movie-section-title {
         @apply text-2xl font-bold mb-4;
     }
@@ -86,4 +192,1970 @@
     .coming-soon {
         @apply inline-block mt-3 text-sm text-gray-500 italic;
     }
+    
+    .compact-footer {
+        @apply py-4;
+    }
+
+    .compact-footer-copyright {
+        @apply py-2;
+    }
+
+   /* ==== CUSTOMER NAVBAR ==== */
+.customer-navbar {
+    @apply bg-gradient-to-r from-gray-800 to-gray-700 text-white px-6 py-3 shadow-lg border-b border-gray-600 fixed top-0 left-0 right-0 z-50;
+}
+
+.customer-navbar-container {
+    @apply max-w-7xl mx-auto flex justify-between items-center;
+}
+
+.customer-navbar-title {
+    @apply text-2xl font-bold text-yellow-400 tracking-wide;
+}
+
+.customer-navbar-links {
+    @apply flex space-x-6 text-sm font-medium list-none m-0 p-0;
+}
+
+.customer-navbar-links li {
+    @apply list-none;
+}
+
+.customer-navbar-links form {
+    @apply inline-block m-0;
+}
+
+.customer-navbar-link {
+    @apply text-gray-200 hover:text-yellow-400 transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-600/50 no-underline;
+}
+
+.customer-logout-button {
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-4 py-2 rounded-md transition-all duration-200 transform hover:scale-105 no-underline font-semibold shadow-md bg-transparent border-none cursor-pointer text-sm;
+}
+
+/* ==== GUEST NAVBAR ==== */
+.guest-navbar {
+    @apply bg-gradient-to-r from-gray-800 to-gray-700 text-white px-6 py-4 shadow-lg border-b border-gray-600 fixed top-0 left-0 right-0 z-50;
+}
+
+.guest-navbar-container {
+    @apply max-w-7xl mx-auto flex justify-between items-center;
+}
+
+.guest-navbar-brand {
+    @apply text-2xl font-bold text-yellow-400 tracking-wide;
+}
+
+.guest-navbar-links {
+    @apply flex space-x-6 text-sm font-medium list-none m-0 p-0;
+}
+
+.guest-navbar-links li {
+    @apply list-none;
+}
+
+.guest-navbar-link {
+    @apply text-gray-200 hover:text-yellow-400 transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-600/50 no-underline;
+}
+
+.guest-login-link {
+    @apply text-gray-200 hover:text-green-400 transition-colors duration-200 px-4 py-2 rounded-md hover:bg-gray-600/50 no-underline font-semibold border border-green-500/30 hover:border-green-400;
+}
+
+.guest-register-link {
+    @apply bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-4 py-2 rounded-md transition-all duration-200 transform hover:scale-105 no-underline font-semibold shadow-md;
+}
+
+/* ==== CREATE SHOWTIME FORM STYLES ==== */
+.showtime-form-container {
+    @apply max-w-2xl mx-auto mt-24 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-2xl border border-gray-700 overflow-hidden;
+}
+
+.showtime-form-header {
+    @apply bg-gradient-to-r from-gray-700 to-gray-800 px-8 py-6 border-b border-gray-600;
+}
+
+.showtime-form-title {
+    @apply text-3xl font-bold text-yellow-400 tracking-wide text-center;
+}
+
+.showtime-form-content {
+    @apply px-8 py-8;
+}
+
+.showtime-form-group {
+    @apply mb-6;
+}
+
+.showtime-form-label {
+    @apply block text-gray-200 font-semibold mb-3 text-sm uppercase tracking-wide;
+}
+
+.showtime-form-input {
+    @apply w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-200;
+}
+
+.showtime-form-select {
+    @apply w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-200 cursor-pointer;
+}
+
+.showtime-form-select option {
+    @apply bg-gray-700 text-white py-2;
+}
+
+.showtime-form-button {
+    @apply w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl border-0 cursor-pointer text-lg;
+}
+
+.showtime-form-button:hover {
+    @apply shadow-yellow-500/25;
+}
+
+.showtime-form-button:active {
+    @apply transform scale-95;
+}
+
+/* Input focus animations */
+.showtime-form-input:focus, .showtime-form-select:focus {
+    @apply shadow-lg shadow-yellow-400/20;
+}
+
+/* Custom styling for date and time inputs */
+.showtime-form-input[type="date"], .showtime-form-input[type="time"] {
+    @apply cursor-pointer;
+}
+
+.showtime-form-input[type="date"]::-webkit-calendar-picker-indicator,
+.showtime-form-input[type="time"]::-webkit-calendar-picker-indicator {
+    @apply filter invert brightness-75 cursor-pointer;
+}
+
+/* Loading state for form submission */
+.showtime-form-button:disabled {
+    @apply opacity-50 cursor-not-allowed transform-none;
+}
+
+
+/* // cinema showtime page styles */
+.cinema-showtime-card {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border: 1px solid #d97706;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cinema-showtime-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .cinema-showtime-card:hover::before {
+        left: 100%;
+    }
+
+    .cinema-showtime-card:hover {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border-color: #fbbf24;
+    box-shadow: 0 10px 25px rgba(217, 119, 6, 0.2);
+    /* Remove translateY to prevent flickering */
+    transform: scale(1.02);
+}
+
+    /* Cinema back button - specific styling */
+    .cinema-back-button {
+        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        border: none;
+        color: #111827;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cinema-back-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .cinema-back-button:hover::before {
+        left: 100%;
+    }
+
+    .cinema-back-button:hover {
+        background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(217, 119, 6, 0.3);
+    }
+
+    /* Showtime page specific background */
+    .cinema-showtime-page {
+        background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+        min-height: 100vh;
+    }
+
+    /* Enhanced card shadows for showtime containers */
+    .cinema-showtime-container {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border: 1px solid #d97706;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        margin-top: 3rem;
+    }
+
+    .cinema-showtime-container:hover {
+        box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+    }
+
+    /* Glowing text effects for showtime page */
+    .cinema-showtime-glow-yellow {
+        text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+
+    .cinema-showtime-glow-rose {
+        text-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+    }
+
+    /* Animated borders for showtime elements */
+    .cinema-showtime-border-animate {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cinema-showtime-border-animate::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+        transition: left 1s ease;
+    }
+
+    .cinema-showtime-border-animate:hover::before {
+        left: 100%;
+    }
+
+    /* Loading animation for showtime buttons */
+    @keyframes pulse-showtime {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    .cinema-showtime-pulse {
+        animation: pulse-showtime 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Today badge styling */
+    .cinema-today-badge {
+        background: linear-gradient(135deg, #059669, #047857);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 0.5rem;
+        animation: pulse-showtime 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Arrow icon styling for showtime cards */
+    .cinema-showtime-arrow {
+        transition: transform 0.2s ease;
+    }
+
+    .cinema-showtime-card:hover .cinema-showtime-arrow {
+        transform: translateX(4px);
+    }
+
+    /* No showtimes available styling */
+    .cinema-no-showtimes {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        border: 1px solid #d97706;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    /* Responsive adjustments for showtime page */
+    @media (max-width: 640px) {
+        .cinema-showtime-card {
+            padding: 1rem;
+        }
+        
+        .cinema-showtime-container {
+            margin: 0.5rem;
+        }
+
+        .cinema-today-badge {
+            font-size: 0.625rem;
+            padding: 0.125rem 0.375rem;
+            margin-left: 0.25rem;
+        }
+    }
+
+    /* Screen effect for showtime page headers */
+    .cinema-showtime-screen-glow {
+        box-shadow: 
+            0 0 20px rgba(217, 119, 6, 0.3),
+            inset 0 0 20px rgba(217, 119, 6, 0.1);
+    }
+
+    /* Ticket-like styling for showtime cards */
+    .cinema-showtime-ticket {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border-left: 4px dashed #d97706;
+        border-right: 4px dashed #d97706;
+        position: relative;
+    }
+
+    .cinema-showtime-ticket::before,
+    .cinema-showtime-ticket::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #111827;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .cinema-showtime-ticket::before {
+        left: -10px;
+    }
+
+    .cinema-showtime-ticket::after {
+        right: -10px;
+    }
+
+    /* //customer cinema seat selection styles */
+    /* ==== CINEMA SEAT SELECTION STYLES ==== */
+.cinema-seat-selection-page {
+    background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+    min-height: 100vh;
+    padding-top: 2rem;
+}
+
+.cinema-seat-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    margin: 1rem;
+}
+
+.cinema-seat-title {
+    color: #fbbf24;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    margin-bottom: 2rem;
+}
+
+.cinema-seat-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.cinema-seat-row-label {
+    width: 1rem;
+    text-align: right;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #d97706;
+    text-shadow: 0 0 5px rgba(217, 119, 6, 0.3);
+}
+
+.cinema-seat-wrapper {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.cinema-seat-wrapper:hover:not(.cinema-seat-booked) {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.4));
+}
+
+.cinema-seat-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.cinema-seat-booked .cinema-seat-image {
+    opacity: 0.3;
+    filter: grayscale(100%) contrast(0.5);
+    cursor: not-allowed;
+}
+
+.cinema-seat-available .cinema-seat-image:hover {
+    opacity: 0.8;
+    filter: brightness(1.2) drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
+}
+
+.cinema-seat-radio {
+    position: absolute;
+    bottom: 0.25rem;
+    left: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: #fbbf24;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cinema-seat-radio:checked {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.8));
+}
+
+.cinema-seat-number {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.cinema-seat-selected {
+    animation: seat-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes seat-glow {
+    from {
+        filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+    }
+    to {
+        filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.9));
+    }
+}
+
+.cinema-confirm-button {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cinema-confirm-button:hover {
+    background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+}
+
+.cinema-confirm-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(5, 150, 105, 0.3);
+}
+
+/* Screen indicator */
+.cinema-screen-indicator {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border: 2px solid #d97706;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 
+        0 0 20px rgba(217, 119, 6, 0.3),
+        inset 0 0 20px rgba(217, 119, 6, 0.1);
+}
+
+.cinema-screen-text {
+    color: #fbbf24;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+/* Legend */
+.cinema-seat-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border-radius: 0.5rem;
+    border: 1px solid #d97706;
+}
+
+.cinema-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #e5e7eb;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.cinema-legend-seat {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.cinema-legend-available {
+    filter: brightness(1.2);
+}
+
+.cinema-legend-booked {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+.cinema-legend-selected {
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.8));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cinema-seat-container {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+    
+    .cinema-seat-wrapper {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .cinema-seat-row {
+        gap: 0.5rem;
+    }
+    
+    .cinema-seat-legend {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .cinema-seat-number {
+        font-size: 0.625rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cinema-seat-wrapper {
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    .cinema-seat-row {
+        gap: 0.25rem;
+    }
+    
+    .cinema-seat-radio {
+        width: 1rem;
+        height: 1rem;
+        bottom: 0.125rem;
+        left: 0.125rem;
+    }
+}
+
+/* // customer now showing styles */
+/* ==== NOW SHOWING STYLES ==== */
+.now-showing-page {
+    background: linear-gradient(135deg, #0f172a 0%, #1f2937 100%);
+    margin-top: 3rem;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+
+}
+
+.now-showing-title {
+    color: #fbbf24;
+    font-size: 1.875rem; /* Tailwind's text-2xl */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    text-align: center;
+}
+
+.now-showing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.now-showing-card {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.now-showing-card:hover {
+    transform: scale(1.02);
+}
+
+.now-showing-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.now-showing-content {
+    padding: 1rem;
+}
+
+.now-showing-movie-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.now-showing-genre {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.now-showing-description {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-top: 0.5rem;
+}
+
+.now-showing-duration {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 0.5rem;
+}
+
+.now-showing-button,
+.now-showing-button-alt {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.now-showing-button {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.now-showing-button:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+}
+
+.now-showing-button-alt {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+}
+
+.now-showing-button-alt:hover {
+    background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+}
+
+/* Responsive Tweaks */
+@media (max-width: 640px) {
+    .now-showing-title {
+        font-size: 1.5rem;
+    }
+
+    .now-showing-image {
+        height: 10rem;
+    }
+}
+
+
+/* !!!!!!!!!!!!!!!!!!!!!! Upcoming Customer styles !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+/* Cinema Upcoming Shows Page Styles */
+
+/* Main page background */
+.cinema-upcoming-page {
+    background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+    margin-top: 3rem;
+    min-height: 100vh;
+}
+
+/* Header container styling */
+.cinema-upcoming-header-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cinema-upcoming-header-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.cinema-upcoming-header-container:hover::before {
+    left: 100%;
+}
+
+.cinema-upcoming-header-container:hover {
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+}
+
+/* Glowing text effect */
+.cinema-upcoming-glow-yellow {
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+/* Upcoming movie card styling */
+.cinema-upcoming-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.cinema-upcoming-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(217, 119, 6, 0.4);
+    border-color: #fbbf24;
+}
+
+/* Movie poster container */
+.cinema-upcoming-poster-container {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+
+.cinema-upcoming-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    filter: brightness(0.9);
+}
+
+.cinema-upcoming-card:hover .cinema-upcoming-poster {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+}
+
+/* Coming Soon Badge */
+.cinema-coming-soon-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    z-index: 10;
+    animation: pulse-upcoming 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+/* Movie overlay */
+.cinema-upcoming-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.85), rgba(180, 83, 9, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.cinema-upcoming-card:hover .cinema-upcoming-overlay {
+    opacity: 1;
+}
+
+.cinema-upcoming-overlay-content {
+    text-align: center;
+    transform: translateY(30px);
+    transition: transform 0.4s ease;
+}
+
+.cinema-upcoming-card:hover .cinema-upcoming-overlay-content {
+    transform: translateY(0);
+}
+
+/* Play button styling */
+.cinema-upcoming-play-button {
+    background: rgba(251, 191, 36, 0.2);
+    border: 2px solid #fbbf24;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto 0;
+    transition: all 0.3s ease;
+}
+
+.cinema-upcoming-overlay-content:hover .cinema-upcoming-play-button {
+    background: rgba(251, 191, 36, 0.3);
+    transform: scale(1.1);
+}
+
+/* Movie info section */
+.cinema-upcoming-info {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+.cinema-upcoming-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px rgba(251, 191, 36, 0.3);
+    transition: color 0.3s ease;
+}
+
+.cinema-upcoming-card:hover .cinema-upcoming-title {
+    color: #f59e0b;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.cinema-upcoming-genre {
+    font-size: 0.875rem;
+    color: #d97706;
+    font-weight: 600;
+}
+
+.cinema-upcoming-description {
+    font-size: 0.875rem;
+    color: #d1d5db;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+.cinema-upcoming-duration {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* Notify Me Button */
+.cinema-notify-button {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+
+.cinema-notify-button:hover {
+    background: linear-gradient(135deg, #047857, #065f46);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
+}
+
+/* Release info styling */
+.cinema-release-info {
+    background: rgba(217, 119, 6, 0.05);
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    margin-top: 1rem;
+}
+
+/* Shimmer effect */
+.cinema-upcoming-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.15), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.cinema-upcoming-card:hover .cinema-upcoming-shimmer {
+    left: 100%;
+}
+
+/* No upcoming movies message */
+.cinema-no-upcoming {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border: 1px solid #d97706;
+    border-radius: 1rem;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Pulsing animation for special elements */
+@keyframes pulse-upcoming {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Enhanced glow effects */
+.cinema-upcoming-card:hover {
+    box-shadow: 
+        0 20px 40px rgba(217, 119, 6, 0.4),
+        0 0 30px rgba(217, 119, 6, 0.2),
+        inset 0 0 30px rgba(217, 119, 6, 0.05);
+}
+
+/* Enhanced border animations */
+.cinema-upcoming-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 0.75rem;
+    background: linear-gradient(45deg, #d97706, #fbbf24, #d97706) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cinema-upcoming-card:hover::after {
+    opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cinema-upcoming-card {
+        margin: 0.5rem;
+    }
+    
+    .cinema-upcoming-poster-container {
+        height: 250px;
+    }
+    
+    .cinema-upcoming-info {
+        padding: 1rem;
+    }
+    
+    .cinema-upcoming-title {
+        font-size: 1.125rem;
+    }
+    
+    .cinema-coming-soon-badge {
+        top: 8px;
+        right: 8px;
+        padding: 0.125rem 0.5rem;
+        font-size: 0.625rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .cinema-upcoming-header-container {
+        margin: 0.5rem;
+        padding: 1.5rem;
+    }
+    
+    .cinema-upcoming-poster-container {
+        height: 220px;
+    }
+    
+    .cinema-no-upcoming {
+        padding: 2rem;
+        margin: 0.5rem;
+    }
+    
+    .cinema-notify-button {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.625rem;
+    }
+}
+
+/* Screen-like glow effect for headers */
+.cinema-upcoming-header-container {
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(217, 119, 6, 0.1),
+        inset 0 0 20px rgba(217, 119, 6, 0.05);
+}
+
+/* Additional hover effects for interactive elements */
+.cinema-upcoming-card:hover .cinema-coming-soon-badge {
+    animation-duration: 1s;
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.6);
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Home */
+/* Cinema Welcome Page Styles */
+
+/* Main page background */
+.cinema-welcome-page {
+    background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+    margin-top: 3rem;
+    min-height: 100vh;
+}
+
+/* Hero Welcome Section */
+.cinema-welcome-hero {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.cinema-welcome-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.1), transparent);
+    transition: left 0.8s ease;
+}
+
+.cinema-welcome-hero:hover::before {
+    left: 100%;
+}
+
+/* Glowing text effects */
+.cinema-welcome-glow-yellow {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+    animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    from {
+        text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+    }
+    to {
+        text-shadow: 0 0 25px rgba(251, 191, 36, 0.8);
+    }
+}
+
+/* Section containers */
+.cinema-section-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.cinema-section-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.05), transparent);
+    transition: left 1s ease;
+}
+
+.cinema-section-container:hover::before {
+    left: 100%;
+}
+
+/* Section headers */
+.cinema-section-header {
+    position: relative;
+    text-align: center;
+}
+
+.cinema-section-glow {
+    text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+}
+
+/* Movie cards - Now Showing */
+.cinema-now-showing-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.cinema-now-showing-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3);
+    border-color: #fbbf24;
+}
+
+/* Movie cards - Upcoming */
+.cinema-upcoming-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.cinema-upcoming-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(217, 119, 6, 0.4);
+    border-color: #fbbf24;
+}
+
+/* Movie poster wrapper */
+.cinema-movie-poster-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+}
+
+.cinema-movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.cinema-now-showing-card:hover .cinema-movie-poster,
+.cinema-upcoming-card:hover .cinema-movie-poster {
+    transform: scale(1.1);
+}
+
+/* Status badges */
+.cinema-now-playing-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    z-index: 10;
+    animation: pulse-now-playing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
+}
+
+.cinema-coming-soon-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    z-index: 10;
+    animation: pulse-coming-soon 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes pulse-now-playing {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulse-coming-soon {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Movie overlay */
+.cinema-movie-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.85), rgba(180, 83, 9, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cinema-now-showing-card:hover .cinema-movie-overlay,
+.cinema-upcoming-card:hover .cinema-movie-overlay {
+    opacity: 1;
+}
+
+.cinema-movie-overlay-content {
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.cinema-now-showing-card:hover .cinema-movie-overlay-content,
+.cinema-upcoming-card:hover .cinema-movie-overlay-content {
+    transform: translateY(0);
+}
+
+/* Movie info section */
+.cinema-movie-info {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+.cinema-movie-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px rgba(251, 191, 36, 0.3);
+    transition: color 0.3s ease;
+}
+
+.cinema-now-showing-card:hover .cinema-movie-title,
+.cinema-upcoming-card:hover .cinema-movie-title {
+    color: #f59e0b;
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+.cinema-movie-genre {
+    font-size: 0.875rem;
+    color: #d97706;
+    font-weight: 600;
+}
+
+.cinema-movie-description {
+    font-size: 0.875rem;
+    color: #d1d5db;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+.cinema-movie-duration {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* Action buttons */
+.cinema-book-now-button {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.cinema-book-now-button:hover {
+    background: linear-gradient(135deg, #047857, #065f46);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.cinema-login-button {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+.cinema-login-button:hover {
+    background: linear-gradient(135deg, #4b5563, #374151);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(107, 114, 128, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Coming soon status */
+.cinema-coming-soon-status {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(180, 83, 9, 0.1));
+    border: 1px solid rgba(217, 119, 6, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+/* Shimmer effect */
+.cinema-card-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.1), transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.cinema-now-showing-card:hover .cinema-card-shimmer,
+.cinema-upcoming-card:hover .cinema-card-shimmer {
+    left: 100%;
+}
+
+/* Empty state */
+.cinema-empty-state {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border: 1px solid #d97706;
+    border-radius: 1rem;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced glow effects */
+.cinema-now-showing-card:hover {
+    box-shadow: 
+        0 15px 35px rgba(217, 119, 6, 0.3),
+        0 0 20px rgba(5, 150, 105, 0.2),
+        inset 0 0 20px rgba(217, 119, 6, 0.05);
+}
+
+.cinema-upcoming-card:hover {
+    box-shadow: 
+        0 20px 40px rgba(217, 119, 6, 0.4),
+        0 0 30px rgba(220, 38, 38, 0.2),
+        inset 0 0 30px rgba(217, 119, 6, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cinema-welcome-hero {
+        padding: 2rem 1rem;
+    }
+    
+    .cinema-section-container {
+        padding: 1.5rem;
+        margin: 0.5rem;
+    }
+    
+    .cinema-movie-poster-wrapper {
+        height: 240px;
+    }
+    
+    .cinema-movie-info {
+        padding: 1rem;
+    }
+    
+    .cinema-movie-title {
+        font-size: 1.125rem;
+    }
+    
+    .cinema-now-playing-badge,
+    .cinema-coming-soon-badge {
+        top: 8px;
+        right: 8px;
+        padding: 0.125rem 0.5rem;
+        font-size: 0.625rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .cinema-welcome-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .cinema-section-glow {
+        font-size: 1.875rem;
+    }
+    
+    .cinema-movie-poster-wrapper {
+        height: 200px;
+    }
+    
+    .cinema-empty-state {
+        padding: 2rem;
+    }
+}
+
+/* Screen-like glow effects */
+.cinema-welcome-hero,
+.cinema-section-container {
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(217, 119, 6, 0.1),
+        inset 0 0 20px rgba(217, 119, 6, 0.05);
+}
+/* !!!!!!!!!!!!!!!!!!!!!! GUEST SHOWING CAUH?! */
+/* Cinema Guest Movies Page Styles - Matching Showtime Page Design */
+
+/* Main page background - matching showtime page */
+.cinema-guest-movies-page {
+    background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+    margin-top: 3rem;
+    min-height: 100vh;
+    color: #f3f4f6;
+}
+
+/* Page title styling - matching showtime glow effects */
+.cinema-guest-title {
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+/* Movie card styling - matching showtime card design */
+.cinema-guest-movie-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer effect - matching showtime card animation */
+.cinema-guest-movie-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.cinema-guest-movie-card:hover::before {
+    left: 100%;
+}
+
+/* Hover effects - matching showtime card hover */
+.cinema-guest-movie-card:hover {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border-color: #fbbf24;
+    box-shadow: 0 10px 25px rgba(217, 119, 6, 0.2);
+    transform: scale(1.02);
+}
+
+/* Movie poster styling */
+.cinema-guest-poster {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d97706;
+    transition: all 0.3s ease;
+}
+
+.cinema-guest-movie-card:hover .cinema-guest-poster {
+    border-color: #fbbf24;
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.2);
+}
+
+/* Movie title styling - matching showtime text colors */
+.cinema-guest-movie-title {
+    color: #fbbf24;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.cinema-guest-movie-card:hover .cinema-guest-movie-title {
+    color: #f59e0b;
+    text-shadow: 0 0 5px rgba(245, 158, 11, 0.3);
+}
+
+/* Movie description styling */
+.cinema-guest-description {
+    color: #d1d5db;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+/* Book now button - matching cinema back button style */
+.cinema-guest-book-button {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    border: none;
+    color: #111827;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button shimmer effect - matching back button animation */
+.cinema-guest-book-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.cinema-guest-book-button:hover::before {
+    left: 100%;
+}
+
+/* Button hover effects - matching back button hover */
+.cinema-guest-book-button:hover {
+    background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(217, 119, 6, 0.3);
+}
+
+/* Container styling - matching showtime container */
+.cinema-guest-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cinema-guest-container:hover {
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+}
+
+/* Glowing text effect - matching showtime glow */
+.cinema-guest-glow-yellow {
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+/* Pulse animation - matching showtime pulse */
+@keyframes cinema-guest-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.cinema-guest-pulse {
+    animation: cinema-guest-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* No movies available styling - matching no showtimes */
+.cinema-no-movies {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    color: #fbbf24;
+}
+
+/* Responsive adjustments - matching showtime responsive */
+@media (max-width: 768px) {
+    .cinema-guest-title {
+        font-size: 1.75rem;
+    }
+    
+    .cinema-guest-movie-card {
+        padding: 0.75rem;
+    }
+    
+    .cinema-guest-poster {
+        height: 12rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .cinema-guest-container {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .cinema-guest-title {
+        font-size: 1.5rem;
+    }
+    
+    .cinema-guest-poster {
+        height: 10rem;
+    }
+    
+    .cinema-guest-book-button {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Screen glow effect - matching showtime screen glow */
+.cinema-guest-screen-glow {
+    box-shadow: 
+        0 0 20px rgba(217, 119, 6, 0.3),
+        inset 0 0 20px rgba(217, 119, 6, 0.1);
+}
+
+/* Additional cinema-themed effects */
+.cinema-guest-film-strip {
+    position: relative;
+}
+
+.cinema-guest-film-strip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #d97706,
+        #d97706 8px,
+        #b45309 8px,
+        #b45309 16px
+    );
+    border-radius: 2px;
+}
+
+/* Ticket perforation effect */
+.cinema-guest-ticket-effect {
+    position: relative;
+    border-top: 2px dashed rgba(217, 119, 6, 0.4);
+    border-bottom: 2px dashed rgba(217, 119, 6, 0.4);
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+}
+
+.cinema-guest-ticket-effect::before,
+.cinema-guest-ticket-effect::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #111827;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #d97706;
+}
+
+.cinema-guest-ticket-effect::before {
+    left: -5px;
+}
+
+.cinema-guest-ticket-effect::after {
+    right: -5px;
+}
+
+/* Guest Upcoming */
+/* Cinema Guest Movies Page Styles */
+
+/* Main page background */
+.cinema-guest-page {
+    background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+    margin-top: 3rem;
+    min-height: 100vh;
+}
+
+/* Header container styling */
+.cinema-guest-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cinema-guest-container:hover {
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+}
+
+/* Movie card styling */
+.cinema-movie-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border: 1px solid #d97706;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cinema-movie-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.cinema-movie-card:hover::before {
+    left: 100%;
+}
+
+.cinema-movie-card:hover {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border-color: #fbbf24;
+    box-shadow: 0 10px 25px rgba(217, 119, 6, 0.2);
+    transform: scale(1.02);
+}
+
+/* Poster container and image */
+.cinema-poster-container {
+    position: relative;
+    height: 16rem; /* h-64 equivalent */
+}
+
+.cinema-poster-image {
+    transition: transform 0.3s ease;
+}
+
+.cinema-movie-card:hover .cinema-poster-image {
+    transform: scale(1.05);
+}
+
+/* Poster overlay */
+.cinema-poster-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 1rem;
+}
+
+.cinema-movie-card:hover .cinema-poster-overlay {
+    opacity: 1;
+}
+
+/* Coming soon badge */
+.cinema-coming-badge {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    animation: pulse-cinema 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Book now button */
+.cinema-book-button {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    border: none;
+    color: #111827;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.cinema-book-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.cinema-book-button:hover::before {
+    left: 100%;
+}
+
+.cinema-book-button:hover {
+    background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(217, 119, 6, 0.3);
+}
+
+/* Arrow animation for book button */
+.cinema-book-arrow {
+    transition: transform 0.2s ease;
+}
+
+.cinema-book-button:hover .cinema-book-arrow {
+    transform: translateX(4px);
+}
+
+/* Glowing text effects */
+.cinema-guest-glow-yellow {
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+/* No movies available styling */
+.cinema-no-movies {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border: 1px solid #d97706;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Pulse animation */
+@keyframes pulse-cinema {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.cinema-pulse {
+    animation: pulse-cinema 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .cinema-movie-card {
+        margin: 0.5rem 0;
+    }
+    
+    .cinema-guest-container {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+
+    .cinema-coming-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+    }
+
+    .cinema-book-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cinema-guest-page {
+        padding: 1rem;
+    }
+    
+    .cinema-poster-container {
+        height: 14rem; /* Slightly smaller on mobile */
+    }
+}
+
+/* Additional hover effects for better UX */
+.cinema-movie-card:hover h2 {
+    text-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
+}
+
+/* Loading state for images */
+.cinema-poster-image[src=""] {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cinema-poster-image[src=""]:before {
+    content: '🎬';
+    font-size: 3rem;
+    opacity: 0.5;
+}
 }
