@@ -63,7 +63,7 @@ Follow these steps to set up the Laravel Cinema Booking App on your local machin
 3. **Install Frontend Dependencies via NPM**
 
 - npm install
-- npm run dev
+- npm run build
 
 4. **Run Migrations**
 
