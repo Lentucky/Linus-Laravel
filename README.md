@@ -53,27 +53,27 @@ Follow these steps to set up the Laravel Cinema Booking App on your local machin
 
 1. **Clone the Repository**
 
-git clone https://github.com/yourusername/laravel-cinema-booking.git
-cd laravel-cinema-booking
+- git clone https://github.com/yourusername/laravel-cinema-booking.git
+- cd laravel-cinema-booking
 
 2. **Install PHP Dependencies via Composer**
 
-composer install
+- composer install
 
 3. **Install Frontend Dependencies via NPM**
 
-npm install
-npm run dev
+- npm install
+- npm run dev
 
 4. **Run Migrations**
 
-php artisan migrate
+- php artisan migrate
 
 5. **Seed the Database**
 
-php artisan db:seed --class=AllSeeder
-php artisam db:seed --class=SeatSeeder
+- php artisan db:seed --class=AllSeeder
+- php artisam db:seed --class=SeatSeeder
 
 6. **Run Laravel Development Server**
 
-php artisan serve
+- php artisan serve
