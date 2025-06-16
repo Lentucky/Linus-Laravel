@@ -64,6 +64,7 @@ Follow these steps to set up the Laravel Cinema Booking App on your local machin
 
 - npm install
 - npm run build
+- php artisan:storage link
 
 4. **Run Migrations**
 
