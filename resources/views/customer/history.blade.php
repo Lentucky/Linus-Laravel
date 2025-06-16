@@ -4,14 +4,14 @@
 
 @section('content')
     <h1>The profile shows the Booking/Ticket History</h1>
-    <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg text-center">
+    <div class="max-w-md mx-auto mt-10 bg-white  p-6 rounded-lg shadow-xl/70 text-center">
 
 
     <!-- User Info -->
     <h2 class="text-2xl font-bold text-gray-800">{{ $user->name }}</h2>
     <p class="text-gray-600">{{ $user->email }}</p>
     <p class="mt-2 text-sm text-gray-500">Joined: {{ $user->created_at->format('F j, Y') }}</p>
-    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-lg shadow">
+    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-xl/20">
         <h2 class="text-2xl font-bold mb-6 text-gray-800">Edit Profile</h2>
 
         @if (session('success'))
@@ -26,9 +26,9 @@
 
             {{-- Name --}}
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <label for="name" class="block text-sm font-medium text-gray-700 ">Name</label>
                 <input id="name" type="text" name="name" value="{{ old('name', $user->name) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                    class="mt-1 block w-full border-gray-300 rounded-md inset-shadow-sm/30 focus:ring-blue-500 focus:border-blue-500" required>
                 @error('name') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
             </div>
 
@@ -36,7 +36,7 @@
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input id="email" type="email" name="email" value="{{ old('email', $user->email) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                    class="mt-1 block w-full border-gray-300 rounded-md inset-shadow-sm/30 focus:ring-blue-500 focus:border-blue-500" required>
                 @error('email') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
             </div>
 
@@ -48,7 +48,7 @@
             <div>
                 <label for="current_password" class="block text-sm font-medium text-gray-700">Current Password</label>
                 <input id="current_password" type="password" name="current_password"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    class="mt-1 block w-full border-gray-300 rounded-md inset-shadow-sm/30 focus:ring-blue-500 focus:border-blue-500">
                 @error('current_password') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
             </div>
 
@@ -56,7 +56,7 @@
             <div>
                 <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>
                 <input id="new_password" type="password" name="new_password"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    class="mt-1 block w-full border-gray-300 rounded-md inset-shadow-sm/30 focus:ring-blue-500 focus:border-blue-500">
                 @error('new_password') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
             </div>
 
@@ -64,7 +64,7 @@
             <div>
                 <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
                 <input id="new_password_confirmation" type="password" name="new_password_confirmation"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    class="mt-1 block w-full border-gray-300 rounded-md inset-shadow-sm/30 focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <div class="pt-4">
@@ -78,7 +78,7 @@
 </div>
 
 <!-- Search button here -->
-<h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">Booking History</h2>
+<h2 class="text-2xl font-bold text-blue-600 mb-2 text-center mt-20">Booking History</h2>
 <div class="overflow-x-auto">
   <table class="min-w-full border border-gray-300 divide-y divide-gray-200">
     <thead class="bg-gray-100">
