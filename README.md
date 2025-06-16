@@ -53,8 +53,8 @@ Follow these steps to set up the Laravel Cinema Booking App on your local machin
 
 1. **Clone the Repository**
 
-- git clone https://github.com/yourusername/laravel-cinema-booking.git
-- cd laravel-cinema-booking
+- git clone https://github.com/Lentucky/Linus-Laravel.git
+- cd Linus-Laravel
 
 2. **Install PHP Dependencies via Composer**
 
